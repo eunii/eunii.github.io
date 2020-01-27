@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>[React] React 시작하기 - EUNII&#39;s BLOG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="naver-site-verification" content="5e444d80464ae52c42147e0db69d86752841928b">
+
+<link rel="canonical" href="https://eunii.github.io/2019/08/06/tec/react/react1/">
+
+    <meta name="description" content="1. Nodejs 설치 및 최신 버전 확인(6버전 이상) https://nodejs.org/ko/ 여기서 최신 nodejs를 설치한다. 콘솔 창(window + R -&amp;gt; cmd 검색) 에서 아래와 같이 명령어를 입력하면 내 pc에 깔린 nodejs버전이 나온다.1node -v   2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작">
+<meta name="keywords" content="tec,react,프레임워크,리엑트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[React] React 시작하기">
+<meta property="og:url" content="https://eunii.github.io/2019/08/06/tec/react/react1/index.html">
+<meta property="og:site_name" content="EUNII&#39;s BLOG">
+<meta property="og:description" content="1. Nodejs 설치 및 최신 버전 확인(6버전 이상) https://nodejs.org/ko/ 여기서 최신 nodejs를 설치한다. 콘솔 창(window + R -&amp;gt; cmd 검색) 에서 아래와 같이 명령어를 입력하면 내 pc에 깔린 nodejs버전이 나온다.1node -v   2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://eunii.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-08-09T02:04:05.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[React] React 시작하기">
+<meta name="twitter:description" content="1. Nodejs 설치 및 최신 버전 확인(6버전 이상) https://nodejs.org/ko/ 여기서 최신 nodejs를 설치한다. 콘솔 창(window + R -&amp;gt; cmd 검색) 에서 아래와 같이 명령어를 입력하면 내 pc에 깔린 nodejs버전이 나온다.1node -v   2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작">
+<meta name="twitter:image" content="https://eunii.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140042371-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-140042371-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="[React] React 시작하기" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/categories/tec/">Technology</a>
+                
+                <a class="navbar-item" href="/categories/trip/">Trip</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-06T02:26:25.000Z">2019-08-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/tec/">tec</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/tec/react/">react</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8분 읽기 (나에 대하여 1204 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                [React] React 시작하기
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-Nodejs-설치-및-최신-버전-확인-6버전-이상"><a href="#1-Nodejs-설치-및-최신-버전-확인-6버전-이상" class="headerlink" title="1. Nodejs 설치 및 최신 버전 확인(6버전 이상)"></a>1. Nodejs 설치 및 최신 버전 확인(6버전 이상)</h2><ul>
+<li><a href="https://nodejs.org/ko/" rel="external nofollow noopener noreferrer" target="_blank">https://nodejs.org/ko/</a> 여기서 최신 nodejs를 설치한다.</li>
+<li>콘솔 창(window + R -&gt; cmd 검색) 에서 아래와 같이 명령어를 입력하면 내 pc에 깔린 nodejs버전이 나온다.<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-프로젝트를-생성할-폴더-위치로-이동하여-다음과-같이-프로젝트를-시작한다"><a href="#2-프로젝트를-생성할-폴더-위치로-이동하여-다음과-같이-프로젝트를-시작한다" class="headerlink" title="2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작한다."></a>2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작한다.</h2><p>아래 명령어로 폴더에 이동후<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd d:\dev\react\tutorial</span><br></pre></td></tr></table></figure></p>
+<p>아래 명령어로 프로젝트를 시작한다.<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g create-react-app   </span><br><span class="line">$ create-react-app my-app</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-my-app-src-하위의-파일들을-삭제한다"><a href="#3-my-app-src-하위의-파일들을-삭제한다" class="headerlink" title="3. my-app/src 하위의 파일들을 삭제한다."></a>3. my-app/src 하위의 파일들을 삭제한다.</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd my-app</span><br><span class="line">$ rm -f src/*</span><br></pre></td></tr></table></figure>
+<h2 id="4-my-app-src-index-css-파일을-만들어-아래-내용을-복사한다"><a href="#4-my-app-src-index-css-파일을-만들어-아래-내용을-복사한다" class="headerlink" title="4. my-app/src/index.css 파일을 만들어 아래 내용을 복사한다."></a>4. my-app/src/index.css 파일을 만들어 아래 내용을 복사한다.</h2><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">body</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">font</span>: <span class="hljs-number">14px</span> <span class="hljs-string">"Century Gothic"</span>, Futura, sans-serif;</span><br><span class="line">  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-tag">ol</span>, <span class="hljs-selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.board-row</span><span class="hljs-selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">clear</span>: both;</span><br><span class="line">  <span class="hljs-attribute">content</span>: <span class="hljs-string">""</span>;</span><br><span class="line">  <span class="hljs-attribute">display</span>: table;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.status</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.square</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">background</span>: <span class="hljs-number">#fff</span>;</span><br><span class="line">  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#999</span>;</span><br><span class="line">  <span class="hljs-attribute">float</span>: left;</span><br><span class="line">  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">24px</span>;</span><br><span class="line">  <span class="hljs-attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">34px</span>;</span><br><span class="line">  <span class="hljs-attribute">height</span>: <span class="hljs-number">34px</span>;</span><br><span class="line">  <span class="hljs-attribute">margin-right</span>: -<span class="hljs-number">1px</span>;</span><br><span class="line">  <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">1px</span>;</span><br><span class="line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-attribute">text-align</span>: center;</span><br><span class="line">  <span class="hljs-attribute">width</span>: <span class="hljs-number">34px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.square</span><span class="hljs-selector-pseudo">:focus</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">outline</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.kbd-navigation</span> <span class="hljs-selector-class">.square</span><span class="hljs-selector-pseudo">:focus</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">background</span>: <span class="hljs-number">#ddd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.game</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">display</span>: flex;</span><br><span class="line">  <span class="hljs-attribute">flex-direction</span>: row;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.game-info</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-my-app-src-index-js-파일을-아래-내용을-복사하여-만든다"><a href="#5-my-app-src-index-js-파일을-아래-내용을-복사하여-만든다" class="headerlink" title="5. my-app/src/index.js 파일을 아래 내용을 복사하여 만든다."></a>5. my-app/src/index.js 파일을 아래 내용을 복사하여 만든다.</h2><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">'./index.css'</span>;   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="hljs-string">"square"</span>&gt;</span><br><span class="line">        &#123;<span class="hljs-comment">/* TODO */</span>&#125;</span><br><span class="line">      &lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">class Board extends React.Component &#123;</span></span><br><span class="line"><span class="hljs-regexp">  renderSquare(i) &#123;</span></span><br><span class="line"><span class="hljs-regexp">    return &lt;Square /</span>&gt;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> status = <span class="hljs-string">'Next player: X'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"status"</span>&gt;&#123;status&#125;&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="board-row"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(0)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(1)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(2)&#125;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"board-row"</span>&gt;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">3</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">4</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">5</span>)&#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="board-row"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(6)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(7)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(8)&#125;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">class Game extends React.Component &#123;</span></span><br><span class="line"><span class="hljs-regexp">  render() &#123;</span></span><br><span class="line"><span class="hljs-regexp">    return (</span></span><br><span class="line"><span class="hljs-regexp">      &lt;div className="game"&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="game-board"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &lt;Board /</span>&gt;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="game-info"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &lt;div&gt;&#123;/</span>* status *<span class="hljs-regexp">/&#125;&lt;/</span>div&gt;</span><br><span class="line">          &lt;ol&gt;&#123;<span class="hljs-comment">/* TODO */</span>&#125;&lt;<span class="hljs-regexp">/ol&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">/</span><span class="hljs-regexp">/ ========================================</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(</span></span><br><span class="line"><span class="hljs-regexp">  &lt;Game /</span>&gt;,</span><br><span class="line">  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="6-아래-명령어로-시작한다"><a href="#6-아래-명령어로-시작한다" class="headerlink" title="6. 아래 명령어로 시작한다."></a>6. 아래 명령어로 시작한다.</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ npm start</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 7. localhost:3000 으로 아래와 같은 화면이 뜬다.</span><br><span class="line"></span><br><span class="line">## 8. my-app/src/index.js파일을 열어보면 아래 세가지 컴포넌트로 구성되어 있다.</span><br><span class="line"></span><br><span class="line">- Square : 하나의 &lt;button&gt;을 렌더링함</span><br><span class="line">- Board : 9개의 사각형을 랜더링함</span><br><span class="line">- Game : 공백있는 하나의 보드를 랜더링함</span><br><span class="line"></span><br><span class="line">## 9. Board 컴포넌트에서 Square 컴포넌트로 데이터(숫자 0~9) 전달하기</span><br><span class="line"></span><br><span class="line">### 9.1 index.js파일의 Board클래스 부분을 아래와 같이 변경한다.</span><br><span class="line">```js</span><br><span class="line">class Board extends React.Component &#123;</span><br><span class="line">  renderSquare(i) &#123;</span><br><span class="line">    return &lt;Square value=&#123;i&#125; /&gt;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-2-Square클래스-render-메서드를-아래와-같이-변경한다"><a href="#9-2-Square클래스-render-메서드를-아래와-같이-변경한다" class="headerlink" title="9.2 Square클래스 render 메서드를 아래와 같이 변경한다."></a>9.2 Square클래스 render 메서드를 아래와 같이 변경한다.</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="hljs-string">"square"</span>&gt;</span><br><span class="line">        &#123;<span class="hljs-keyword">this</span>.props.value&#125;</span><br><span class="line">      &lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>이렇게 변경해서 저장 후 npm start로 실행해보면 비어있던 9개 사각형 칸에 0~8까지 숫자가 입력되서 나온다.</li>
+</ul>
+<h2 id="10-대화형-컴포넌트-빈-사각형을-클릭하면-X표시가-되게-변경하기"><a href="#10-대화형-컴포넌트-빈-사각형을-클릭하면-X표시가-되게-변경하기" class="headerlink" title="10. 대화형 컴포넌트 : 빈 사각형을 클릭하면 X표시가 되게 변경하기"></a>10. 대화형 컴포넌트 : 빈 사각형을 클릭하면 X표시가 되게 변경하기</h2><h3 id="10-1-Sqare의-render-함수를-아래와-같이-변경한다"><a href="#10-1-Sqare의-render-함수를-아래와-같이-변경한다" class="headerlink" title="10.1 Sqare의 render()함수를 아래와 같이 변경한다."></a>10.1 Sqare의 render()함수를 아래와 같이 변경한다.</h3><p>Square클래스의 생성자에서 this.state을 설정하여 상태(초기값 null)를 가질 수 있게 한다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      value: <span class="hljs-literal">null</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>아래와 같이 render()함수를 변경하면 사각형을 클릭하면 클릭한 빈 사각형안의 값이 X로 바뀐다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      value: <span class="hljs-literal">null</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="hljs-string">"square"</span> onClick=&#123;() =&gt; <span class="hljs-keyword">this</span>.setState(&#123;<span class="hljs-attr">value</span>: <span class="hljs-string">'X'</span>&#125;)&#125;&gt;</span><br><span class="line">        &#123;<span class="hljs-keyword">this</span>.state.value&#125;</span><br><span class="line">      &lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="11-State에-저장하기"><a href="#11-State에-저장하기" class="headerlink" title="11 State에 저장하기"></a>11 State에 저장하기</h2><p>클릭 할때마다 o,x 번갈아 나오게 하고, 승자를 가리기 위해 9개 블럭의 상태를 동시에 확인해야함.<br>여러 하위 컴포넌트로 부터 데이터를 모으거나, 하위 컴포넌트들이 서로 통신하기 원하면 상위컴포넌트로 state를 이동시킴.<br>상위 컴포컨트는 props를 통해 하위 컴포넌트로 state를 전달해 줄 수 있다. </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Board</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      squares: <span class="hljs-built_in">Array</span>(<span class="hljs-number">9</span>).fill(<span class="hljs-literal">null</span>),</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  renderSquare(i) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Square</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;i&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="hljs-xml">  &#125;</span></span><br><span class="line"><span class="hljs-xml"></span></span><br><span class="line"><span class="hljs-xml">  render() &#123;</span></span><br><span class="line"><span class="hljs-xml">    const status = 'Next player: X';</span></span><br><span class="line"><span class="hljs-xml"></span></span><br><span class="line"><span class="hljs-xml">    return (</span></span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className="status"&gt;&#123;status&#125;&lt;/div&gt;</span><br><span class="line">        &lt;div className="board-row"&gt;</span><br><span class="line">          &#123;this.renderSquare(0)&#125;</span><br><span class="line">          &#123;this.renderSquare(1)&#125;</span><br><span class="line">          &#123;this.renderSquare(2)&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div className="board-row"&gt;</span><br><span class="line">          &#123;this.renderSquare(3)&#125;</span><br><span class="line">          &#123;this.renderSquare(4)&#125;</span><br><span class="line">          &#123;this.renderSquare(5)&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div className="board-row"&gt;</span><br><span class="line">          &#123;this.renderSquare(6)&#125;</span><br><span class="line">          &#123;this.renderSquare(7)&#125;</span><br><span class="line">          &#123;this.renderSquare(8)&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"><span class="hljs-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">    );</span></span><br><span class="line"><span class="hljs-xml">  &#125;</span></span><br><span class="line"><span class="hljs-xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>지금 board의 renderSquare매서드는 아래와 같다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">renderSquare(i) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Square</span> <span class="hljs-attr">value</span> =<span class="hljs-string">&#123;i&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="hljs-xml"></span></span><br><span class="line"><span class="hljs-xml">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>Square에 value prop를 전달하도록 수정한다<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">renderSquare(i) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Square</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;this.state.squares[i]&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="hljs-xml">  &#125;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">renderSquare(i) &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> (</span><br><span class="line">    &lt;Square</span><br><span class="line">      value=&#123;<span class="hljs-keyword">this</span>.state.squares[i]&#125;</span><br><span class="line">      onClick=&#123;() =&gt; <span class="hljs-keyword">this</span>.handleClick(i)&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="hljs-string">"square"</span> onClick=&#123;() =&gt; <span class="hljs-keyword">this</span>.props.onClick()&#125;&gt;</span><br><span class="line">        &#123;<span class="hljs-keyword">this</span>.props.value&#125;</span><br><span class="line">      &lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Board</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      squares: <span class="hljs-built_in">Array</span>(<span class="hljs-number">9</span>).fill(<span class="hljs-literal">null</span>),</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClick(i) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> squares = <span class="hljs-keyword">this</span>.state.squares.slice();</span><br><span class="line">    squares[i] = <span class="hljs-string">'X'</span>;</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;<span class="hljs-attr">squares</span>: squares&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  renderSquare(i) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;Square</span><br><span class="line">        value=&#123;<span class="hljs-keyword">this</span>.state.squares[i]&#125;</span><br><span class="line">        onClick=&#123;() =&gt; <span class="hljs-keyword">this</span>.handleClick(i)&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> status = <span class="hljs-string">'Next player: X'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"status"</span>&gt;&#123;status&#125;&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="board-row"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(0)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(1)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(2)&#125;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"board-row"</span>&gt;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">3</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">4</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">5</span>)&#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="board-row"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(6)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(7)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(8)&#125;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Square</span>(<span class="hljs-params">props</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> (</span><br><span class="line">    &lt;button className=<span class="hljs-string">"square"</span> onClick=&#123;props.onClick&#125;&gt;</span><br><span class="line">      &#123;props.value&#125;</span><br><span class="line">    &lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">  );</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">class Board extends React.Component &#123;</span></span><br><span class="line"><span class="hljs-regexp">  renderSquare(i) &#123;</span></span><br><span class="line"><span class="hljs-regexp">    return (</span></span><br><span class="line"><span class="hljs-regexp">      &lt;Square</span></span><br><span class="line"><span class="hljs-regexp">        value=&#123;this.props.squares[i]&#125;</span></span><br><span class="line"><span class="hljs-regexp">        onClick=&#123;() =&gt; this.props.onClick(i)&#125;</span></span><br><span class="line"><span class="hljs-regexp">      /</span>&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"board-row"</span>&gt;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">0</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">1</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">2</span>)&#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="board-row"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(3)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(4)&#125;</span></span><br><span class="line"><span class="hljs-regexp">          &#123;this.renderSquare(5)&#125;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"board-row"</span>&gt;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">6</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">7</span>)&#125;</span><br><span class="line">          &#123;<span class="hljs-keyword">this</span>.renderSquare(<span class="hljs-number">8</span>)&#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Game</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      history: [</span><br><span class="line">        &#123;</span><br><span class="line">          squares: <span class="hljs-built_in">Array</span>(<span class="hljs-number">9</span>).fill(<span class="hljs-literal">null</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      stepNumber: <span class="hljs-number">0</span>,</span><br><span class="line">      xIsNext: <span class="hljs-literal">true</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClick(i) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> history = <span class="hljs-keyword">this</span>.state.history.slice(<span class="hljs-number">0</span>, <span class="hljs-keyword">this</span>.state.stepNumber + <span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">const</span> current = history[history.length - <span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">const</span> squares = current.squares.slice();</span><br><span class="line">    <span class="hljs-keyword">if</span> (calculateWinner(squares) || squares[i]) &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    squares[i] = <span class="hljs-keyword">this</span>.state.xIsNext ? <span class="hljs-string">"X"</span> : <span class="hljs-string">"O"</span>;</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      history: history.concat([</span><br><span class="line">        &#123;</span><br><span class="line">          squares: squares</span><br><span class="line">        &#125;</span><br><span class="line">      ]),</span><br><span class="line">      stepNumber: history.length,</span><br><span class="line">      xIsNext: !<span class="hljs-keyword">this</span>.state.xIsNext</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  jumpTo(step) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      stepNumber: step,</span><br><span class="line">      xIsNext: (step % <span class="hljs-number">2</span>) === <span class="hljs-number">0</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> history = <span class="hljs-keyword">this</span>.state.history;</span><br><span class="line">    <span class="hljs-keyword">const</span> current = history[<span class="hljs-keyword">this</span>.state.stepNumber];</span><br><span class="line">    <span class="hljs-keyword">const</span> winner = calculateWinner(current.squares);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> moves = history.map(<span class="hljs-function">(<span class="hljs-params">step, move</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">const</span> desc = move ?</span><br><span class="line">        <span class="hljs-string">'Go to move #'</span> + move :</span><br><span class="line">        <span class="hljs-string">'Go to game start'</span>;</span><br><span class="line">      <span class="hljs-keyword">return</span> (</span><br><span class="line">        &lt;li key=&#123;move&#125;&gt;</span><br><span class="line">          &lt;button onClick=&#123;() =&gt; <span class="hljs-keyword">this</span>.jumpTo(move)&#125;&gt;&#123;desc&#125;&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>li&gt;</span><br><span class="line">      );</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">let</span> status;</span><br><span class="line">    <span class="hljs-keyword">if</span> (winner) &#123;</span><br><span class="line">      status = <span class="hljs-string">"Winner: "</span> + winner;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      status = <span class="hljs-string">"Next player: "</span> + (<span class="hljs-keyword">this</span>.state.xIsNext ? <span class="hljs-string">"X"</span> : <span class="hljs-string">"O"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="hljs-string">"game"</span>&gt;</span><br><span class="line">        &lt;div className=<span class="hljs-string">"game-board"</span>&gt;</span><br><span class="line">          &lt;Board</span><br><span class="line">            squares=&#123;current.squares&#125;</span><br><span class="line">            onClick=&#123;i =&gt; <span class="hljs-keyword">this</span>.handleClick(i)&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;div className="game-info"&gt;</span></span><br><span class="line"><span class="hljs-regexp">          &lt;div&gt;&#123;status&#125;&lt;/</span>div&gt;</span><br><span class="line">          &lt;ol&gt;&#123;moves&#125;&lt;<span class="hljs-regexp">/ol&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">/</span><span class="hljs-regexp">/ ========================================</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(&lt;Game /</span>&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"root"</span>));</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">calculateWinner</span>(<span class="hljs-params">squares</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> lines = [</span><br><span class="line">    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>],</span><br><span class="line">    [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>],</span><br><span class="line">    [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>],</span><br><span class="line">    [<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>],</span><br><span class="line">    [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>],</span><br><span class="line">    [<span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>],</span><br><span class="line">    [<span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>],</span><br><span class="line">    [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>]</span><br><span class="line">  ];</span><br><span class="line">  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; lines.length; i++) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> [a, b, c] = lines[i];</span><br><span class="line">    <span class="hljs-keyword">if</span> (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> squares[a];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/react/">react</a>, <a class="has-link-grey -link" href="/tags/tec/">tec</a>, <a class="has-link-grey -link" href="/tags/리엑트/">리엑트</a>, <a class="has-link-grey -link" href="/tags/프레임워크/">프레임워크</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/12/tec/react/react2/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">[React 교과서] 1장 React 살펴보기</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/05/tec/blog/blog11/">
+                <span class="level-item">[Markdown] Markdown 문법 정리</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://eunii.github.io/2019/08/06/tec/react/react1/';
+        this.page.identifier = '2019/08/06/tec/react/react1/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'crlo2' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/ap.jpg" alt="eunii">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        eunii
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        developer/traveler
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Galaxy</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        포스트
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        83
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        카테고리
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        태그
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eunii" target="_blank" rel="external nofollow noopener noreferrer">
+                팔로우</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Nodejs-설치-및-최신-버전-확인-6버전-이상">
+        <span class="has-mr-6">1</span>
+        <span>1. Nodejs 설치 및 최신 버전 확인(6버전 이상)</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-프로젝트를-생성할-폴더-위치로-이동하여-다음과-같이-프로젝트를-시작한다">
+        <span class="has-mr-6">2</span>
+        <span>2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-my-app-src-하위의-파일들을-삭제한다">
+        <span class="has-mr-6">3</span>
+        <span>3. my-app/src 하위의 파일들을 삭제한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-my-app-src-index-css-파일을-만들어-아래-내용을-복사한다">
+        <span class="has-mr-6">4</span>
+        <span>4. my-app/src/index.css 파일을 만들어 아래 내용을 복사한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-my-app-src-index-js-파일을-아래-내용을-복사하여-만든다">
+        <span class="has-mr-6">5</span>
+        <span>5. my-app/src/index.js 파일을 아래 내용을 복사하여 만든다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-아래-명령어로-시작한다">
+        <span class="has-mr-6">6</span>
+        <span>6. 아래 명령어로 시작한다.</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#9-2-Square클래스-render-메서드를-아래와-같이-변경한다">
+        <span class="has-mr-6">6.1</span>
+        <span>9.2 Square클래스 render 메서드를 아래와 같이 변경한다.</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-대화형-컴포넌트-빈-사각형을-클릭하면-X표시가-되게-변경하기">
+        <span class="has-mr-6">7</span>
+        <span>10. 대화형 컴포넌트 : 빈 사각형을 클릭하면 X표시가 되게 변경하기</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-Sqare의-render-함수를-아래와-같이-변경한다">
+        <span class="has-mr-6">7.1</span>
+        <span>10.1 Sqare의 render()함수를 아래와 같이 변경한다.</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#11-State에-저장하기">
+        <span class="has-mr-6">8</span>
+        <span>11 State에 저장하기</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Nodejs-설치-및-최신-버전-확인-6버전-이상">
+        <span class="has-mr-6">1</span>
+        <span>1. Nodejs 설치 및 최신 버전 확인(6버전 이상)</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-프로젝트를-생성할-폴더-위치로-이동하여-다음과-같이-프로젝트를-시작한다">
+        <span class="has-mr-6">2</span>
+        <span>2. 프로젝트를 생성할 폴더 위치로 이동하여 다음과 같이 프로젝트를 시작한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-my-app-src-하위의-파일들을-삭제한다">
+        <span class="has-mr-6">3</span>
+        <span>3. my-app/src 하위의 파일들을 삭제한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-my-app-src-index-css-파일을-만들어-아래-내용을-복사한다">
+        <span class="has-mr-6">4</span>
+        <span>4. my-app/src/index.css 파일을 만들어 아래 내용을 복사한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-my-app-src-index-js-파일을-아래-내용을-복사하여-만든다">
+        <span class="has-mr-6">5</span>
+        <span>5. my-app/src/index.js 파일을 아래 내용을 복사하여 만든다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-아래-명령어로-시작한다">
+        <span class="has-mr-6">6</span>
+        <span>6. 아래 명령어로 시작한다.</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#9-2-Square클래스-render-메서드를-아래와-같이-변경한다">
+        <span class="has-mr-6">6.1</span>
+        <span>9.2 Square클래스 render 메서드를 아래와 같이 변경한다.</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-대화형-컴포넌트-빈-사각형을-클릭하면-X표시가-되게-변경하기">
+        <span class="has-mr-6">7</span>
+        <span>10. 대화형 컴포넌트 : 빈 사각형을 클릭하면 X표시가 되게 변경하기</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-Sqare의-render-함수를-아래와-같이-변경한다">
+        <span class="has-mr-6">7.1</span>
+        <span>10.1 Sqare의 render()함수를 아래와 같이 변경한다.</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#11-State에-저장하기">
+        <span class="has-mr-6">8</span>
+        <span>11 State에 저장하기</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="[React] React 시작하기" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 eunii&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

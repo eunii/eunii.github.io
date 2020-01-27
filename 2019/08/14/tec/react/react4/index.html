@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>[React 교과서] 3장 JSX - EUNII&#39;s BLOG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="naver-site-verification" content="5e444d80464ae52c42147e0db69d86752841928b">
+
+<link rel="canonical" href="https://eunii.github.io/2019/08/14/tec/react/react4/">
+
+    <meta name="description" content="리엑트 교과서를 정리한 내용입니다.  3.1 JSX의 정의와 장점함수 호출과 객체 생성을 위한 문법적 편의를 제공하는 자바스크립트의 확장. JSX가 React에 필수적이지는 않지만 같이 사용할것이 권장됨  개발자 경험 개선: 코드를 읽기 쉽다 팀의 생산성 향상: HTML과 비슷하여 친숙함 문법 오류와 코드량 감소  JSX코드 예제 12345&amp;lt;div&amp;">
+<meta name="keywords" content="tec,react,프레임워크,리엑트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[React 교과서] 3장 JSX">
+<meta property="og:url" content="https://eunii.github.io/2019/08/14/tec/react/react4/index.html">
+<meta property="og:site_name" content="EUNII&#39;s BLOG">
+<meta property="og:description" content="리엑트 교과서를 정리한 내용입니다.  3.1 JSX의 정의와 장점함수 호출과 객체 생성을 위한 문법적 편의를 제공하는 자바스크립트의 확장. JSX가 React에 필수적이지는 않지만 같이 사용할것이 권장됨  개발자 경험 개선: 코드를 읽기 쉽다 팀의 생산성 향상: HTML과 비슷하여 친숙함 문법 오류와 코드량 감소  JSX코드 예제 12345&amp;lt;div&amp;">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://eunii.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-08-29T01:58:40.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[React 교과서] 3장 JSX">
+<meta name="twitter:description" content="리엑트 교과서를 정리한 내용입니다.  3.1 JSX의 정의와 장점함수 호출과 객체 생성을 위한 문법적 편의를 제공하는 자바스크립트의 확장. JSX가 React에 필수적이지는 않지만 같이 사용할것이 권장됨  개발자 경험 개선: 코드를 읽기 쉽다 팀의 생산성 향상: HTML과 비슷하여 친숙함 문법 오류와 코드량 감소  JSX코드 예제 12345&amp;lt;div&amp;">
+<meta name="twitter:image" content="https://eunii.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140042371-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-140042371-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="[React 교과서] 3장 JSX" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/categories/tec/">Technology</a>
+                
+                <a class="navbar-item" href="/categories/trip/">Trip</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-14T08:26:25.000Z">2019-08-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/tec/">tec</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/tec/react/">react</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12분 읽기 (나에 대하여 1730 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                [React 교과서] 3장 JSX
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>리엑트 교과서를 정리한 내용입니다.</p>
+</blockquote>
+<h2 id="3-1-JSX의-정의와-장점"><a href="#3-1-JSX의-정의와-장점" class="headerlink" title="3.1 JSX의 정의와 장점"></a>3.1 JSX의 정의와 장점</h2><p>함수 호출과 객체 생성을 위한 문법적 편의를 제공하는 자바스크립트의 확장. JSX가 React에 필수적이지는 않지만 같이 사용할것이 권장됨</p>
+<ul>
+<li>개발자 경험 개선: 코드를 읽기 쉽다</li>
+<li>팀의 생산성 향상: HTML과 비슷하여 친숙함</li>
+<li><p>문법 오류와 코드량 감소</p>
+</li>
+<li><p>JSX코드 예제</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;HelloWorld/&gt;</span><br><span class="line">    &lt;br/&gt;</span><br><span class="line">    &lt;a href = <span class="hljs-string">"https://eunii.github.io"</span>&gt; eunii blog&lt;<span class="hljs-regexp">/a&gt;</span></span><br><span class="line"><span class="hljs-regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>위의 코드 자바스크립트로 변경한 예제</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">React.createElement(</span><br><span class="line">    <span class="hljs-string">"div"</span>,</span><br><span class="line">    <span class="hljs-literal">null</span>,</span><br><span class="line">    React.createElement(HellowWorld, <span class="hljs-literal">null</span>),</span><br><span class="line">    React.createElement(<span class="hljs-string">"br"</span>, <span class="hljs-literal">null</span>),</span><br><span class="line">    React.createElement(</span><br><span class="line">        <span class="hljs-string">"a"</span>,</span><br><span class="line">        &#123;<span class="hljs-attr">href</span> : <span class="hljs-string">"https://eunii.github.io"</span>&#125;,</span><br><span class="line">        <span class="hljs-string">"eunii blog"</span></span><br><span class="line">        ),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>자바스크립트 코드 사이에 &lt;&gt;가 있으면 처음에는 어색하지만. React.createBlement(NAME, …) 대신 을 사용하는것이 훨씬 직관적이고 편리하다.<br>JSX를 사용하려면 브라우저에서 실행하기 전에 컴파일 또는 트랜스파일 과정을 거쳐 일반적 자바스크립트 파일로 변환해야한다.</p>
+<h2 id="3-2-JSX의-이해"><a href="#3-2-JSX의-이해" class="headerlink" title="3.2 JSX의 이해"></a>3.2 JSX의 이해</h2><h3 id="3-2-1-JSX로-React-엘리먼트-생성하기"><a href="#3-2-1-JSX로-React-엘리먼트-생성하기" class="headerlink" title="3.2.1 JSX로 React 엘리먼트 생성하기"></a>3.2.1 JSX로 React 엘리먼트 생성하기</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">React.createElement(</span><br><span class="line">    name,</span><br><span class="line">    &#123;<span class="hljs-attr">key1</span>: value1, <span class="hljs-attr">key2</span>: vlaue2, ...&#125;,</span><br><span class="line">    child1, child2, ..., childN</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>위의 코드를 JSX로 바꾸면 아래와 같다<br><figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;name key1=value1 key2 value2 ...&gt;</span><br><span class="line">    &lt;child1/&gt;</span><br><span class="line">    &lt;child2/&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;childN/&gt;</span><br><span class="line">&lt;<span class="hljs-regexp">/name&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>계속 공부해 왔던 HelloWorld예제를 자바스크립트로 작성하면<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">        React.createElement(<span class="hljs-string">'h1'</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'Hello world!'</span>),</span><br><span class="line">        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>위의 코드를 JSX로 작성하면<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">        &lt;h1&gt;Hello world!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></span><br><span class="line">        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>JSX문법으로 작성한 객체도 변수에 저장 가능하다.<br><figure class="highlight jsx hljs"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> helloWorldReactElement = <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    helloWorldReactElement,</span><br><span class="line">    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-2-2-React-컴포넌트에-JSX-사용하기"><a href="#3-2-2-React-컴포넌트에-JSX-사용하기" class="headerlink" title="3.2.2 React 컴포넌트에 JSX 사용하기"></a>3.2.2 React 컴포넌트에 JSX 사용하기</h3><figure class="highlight plain hljs"><figcaption><span>JSX 태그는 표준 HTML 태그 이름이기도 하다. 컴포넌트를 다룰 때에도 같은 문법을 사용하고 컴포넌트 클래스 이름이 대문자로 시작한다.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- JSX를 이용해서 생성한 HelloWorld클래스</span><br><span class="line">```js</span><br><span class="line">class HelloWorld extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return(</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h1&gt; 1. Hello world!&lt;/h1&gt;</span><br><span class="line">                &lt;h2&gt; 2. Hello world!&lt;/h1&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;HelloWorld/&gt;</span><br><span class="line">    document.getElementById(&apos;content&apos;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-3-JSX에서-변수-출력하기"><a href="#3-2-3-JSX에서-변수-출력하기" class="headerlink" title="3.2.3 JSX에서 변수 출력하기"></a>3.2.3 JSX에서 변수 출력하기</h3><p>컴포넌트를 작송할때, 약간의 코드로 자체적으로 뷰를 변경할 수 있는 코드를 만들기. ex) 현재 시간/날짜를 사용하기<br>JSX없이 React만 사용하면 +를 이용해 연결하거느 ‘와 ${varName}로 표시한 문자열 탬플릿을 사용할 수 있다. (템플릿 리터럴)</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateTimeNow</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="hljs-keyword">let</span> dateTimeNow = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleDateString()</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> Hello &#123;this.props.userName&#125;, current date and time is &#123;dateTimeNow&#125;.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> helloWorldReactElement = <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorld</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">      &#123;helloWorldReactElement&#125;</span></span><br><span class="line"><span class="hljs-xml">      &#123;helloWorldReactElement&#125;</span></span><br><span class="line"><span class="hljs-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;HelloWorld/&gt;,</span><br><span class="line">  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-4-JSX에서-속성-사용하기"><a href="#3-2-4-JSX에서-속성-사용하기" class="headerlink" title="3.2.4 JSX에서 속성 사용하기"></a>3.2.4 JSX에서 속성 사용하기</h3><p>사용자 계정에 연결할 컴포넌트를 만들때, href와 title의 값은 사용자에 따라 달라져야 하므로 하드 코딩할 수 없다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProfileLint</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> (</span><br><span class="line">            &lt;a href =&#123;<span class="hljs-keyword">this</span>.props.url&#125;</span><br><span class="line">                title =&#123;<span class="hljs-keyword">this</span>.props.lable&#125;</span><br><span class="line">                target=<span class="hljs-string">"_blank"</span>&gt;</span><br><span class="line">                Profile</span><br><span class="line">            &lt;<span class="hljs-regexp">/a&gt;</span></span><br><span class="line"><span class="hljs-regexp">          </span></span><br><span class="line"><span class="hljs-regexp">        )</span></span><br><span class="line"><span class="hljs-regexp">    &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>위의 코드에서 속성값은 ProfileLink 생성시에 정의된다. ProfileLink를 생성하는 부모 컴포넌트에서 이 값을 전달함.<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ProfileLink url=&apos;/user/azat&apos; label=&apos;Profile for azat&apos; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>가끔 사용자 지정 데이터를 속성으로 추가할 때가 있다. DOM요소에 속성으로 넣는것은 흔히 사용하지만 HTML 비표준 속성에 데이터를 저장하는 것은 안티패턴으로 여겨진다.<br>DOM에서 데이터를 가져오는것은 메모리 상의 가상 저장소에서 데이터를 가져오는것보다 느리다.</p>
+<p>데이터를 반드시 HTML요소의 속성으로 저장해야 하는 경우는 data-*속성을 사용한다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li data-react-is-awesom=&#123;<span class="hljs-keyword">this</span>.reactIsAwesome&#125;&gt; React is awesome!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>위의 경우reactIsAwesome 값이 true라면 아래와 같이 HTML이 렌더링 된다<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li data-react-is-awesom=<span class="hljs-string">"true"</span>&#125;&gt; React is awesome!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>하지만 아래와 같이 비표준 HTML속성을 전달하면 HTML속성이 렌더링 되지 않는다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;li react-is-awesom=&#123;<span class="hljs-keyword">this</span>.reactIsAwesome&#125;&gt; React is awesome!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span><br><span class="line">&lt;li reactIsAwesom=&#123;<span class="hljs-keyword">this</span>.reactIsAwesome&#125;&gt; React is awesome!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>위의 결과는 아래와 같다<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt; React is awesome!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span><br><span class="line">&lt;li&gt; React is awesome!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>아것대신 this.props를 통해서 입력한데이터는 모든 속성에 접근할 수 있다. 모든 속성을 전달해야 한다면 …를 사용할 수 있다.({…this.props)</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorld</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> &#123;<span class="hljs-attr">...this.props</span>&#125;&gt;</span>Hello &#123;this.props.frameworkName&#125; world!!!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;HelloWorld</span><br><span class="line">      id=<span class="hljs-string">'ember'</span></span><br><span class="line">      frameworkName=<span class="hljs-string">'Ember.js'</span></span><br><span class="line">      title=<span class="hljs-string">'A framework for creating ambitious web applications.'</span>/&gt;</span><br><span class="line">    &lt;HelloWorld</span><br><span class="line">      id=<span class="hljs-string">'backbone'</span></span><br><span class="line">      frameworkName=<span class="hljs-string">'Backbone.js'</span></span><br><span class="line">      title=<span class="hljs-string">'Backbone.js gives structure to web applications...'</span>/&gt;</span><br><span class="line">    &lt;HelloWorld</span><br><span class="line">      id=<span class="hljs-string">'angular'</span></span><br><span class="line">      frameworkName=<span class="hljs-string">'Angular.js'</span></span><br><span class="line">      title=<span class="hljs-string">'Superheroic JavaScript MVW Framework'</span>/&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById('content')</span></span><br><span class="line"><span class="hljs-regexp">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-5-React-컴포넌트-메서드-생성하기"><a href="#3-2-5-React-컴포넌트-메서드-생성하기" class="headerlink" title="3.2.5 React 컴포넌트 메서드 생성하기"></a>3.2.5 React 컴포넌트 메서드 생성하기</h3><p>React 컴포넌트에 애플리케이션을 위한 메서드를 자유롭게 추가할 수 있다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Content</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">    getUrl()&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">'http://webapplog.com'</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>{}안에 클래스 메서드를 호출 하는 방식으로 사용한다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Content</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  getUrl() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">'http://webapplog.com'</span></span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;p&gt;Your REST API URL is: <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&#123;this.getUrl()&#125;</span>&gt;</span>&#123;this.getUrl()&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-2-6-JSX의-if-else처리"><a href="#3-2-6-JSX의-if-else처리" class="headerlink" title="3.2.6 JSX의 if/else처리"></a>3.2.6 JSX의 if/else처리</h3><ul>
+<li>유저 세션에 따른 렌더링 처리 예시(자바스크립트)<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">render()&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(user.session)</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/logout"</span>&gt;</span> Logout<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/login"</span>&gt;</span> Login<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>JSX로 3가지 방법 표현법<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//방법1 변수</span></span><br><span class="line">render()&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> link</span><br><span class="line">    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.props.user.session)&#123;</span><br><span class="line">        link = <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/logout"</span>&gt;</span> Logout<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        link =  <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/login"</span>&gt;</span> Login<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;link&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 방법 2 표현식</span></span><br><span class="line">render()&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> link = <span class="hljs-function">(<span class="hljs-params">sessionFlag</span>) =&gt;</span> &#123;</span><br><span class="line">       <span class="hljs-keyword">if</span>(sessionFlag)&#123; </span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/logout"</span>&gt;</span> Logout<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">       <span class="hljs-keyword">else</span> </span><br><span class="line">           <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/login"</span>&gt;</span> Login<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;link(this.props.user.session&#125;)&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//방법 3 삼항연산자</span></span><br><span class="line">render()&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span>(</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &#123;(<span class="hljs-keyword">this</span>.props.uwer.session)</span><br><span class="line">            ? <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/logout"</span>&gt;</span> Logout<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">            : <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/login"</span>&gt;</span> Login<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">            &#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )   </span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>return 문 이전에 JSX 외부에 변수를 선언한 후 JSX 내부에서 {}를 사용하여 출력한다</li>
+<li>return 문 이전에 JSX외부에서 값을 반환하는 함수 표현식을 선언한 후 JSX내부의 {}에서 실행한다</li>
+<li>삼항연산자를 사용한다</li>
+<li>JSX 내부에서 즉시 실행함수를 사용한다. </li>
+</ul>
+<h3 id="3-2-7-JSX의-주석-작성-방법"><a href="#3-2-7-JSX의-주석-작성-방법" class="headerlink" title="3.2.7 JSX의 주석 작성 방법"></a>3.2.7 JSX의 주석 작성 방법</h3><p>일반 자바스크립트 주석과 비슷하다. {}로 감싸서 작성한다.</p>
+<h2 id="3-3-Babel을-이용한-JSX-트랜스-파일러-설정하기"><a href="#3-3-Babel을-이용한-JSX-트랜스-파일러-설정하기" class="headerlink" title="3.3 Babel을 이용한 JSX 트랜스 파일러 설정하기"></a>3.3 Babel을 이용한 JSX 트랜스 파일러 설정하기</h2><p>JSX파일을 자바스크립트코드로 변환하는 과정을 트랜스파일레이션이라고 한다.</p>
+<ul>
+<li>Babel 명령줄 인터페이스 도구</li>
+<li>Node.js 또는 브라우저 자바스크립트로 작성한 스크립트(API방식): babel-core 패키지를 이용해서 스크립트를 직성해 변환하는 방식</li>
+<li>빌드 도구: Grunt, Gulp, Webpack도구에서 Babel을 플러그인으로 사용할 수 있다.</li>
+</ul>
+<h4 id="1-Node-js-npm-설치"><a href="#1-Node-js-npm-설치" class="headerlink" title="1. Node.js npm 설치"></a>1. Node.js npm 설치</h4><h2 id="3-4-React와-JSX의-까다로운-부분"><a href="#3-4-React와-JSX의-까다로운-부분" class="headerlink" title="3.4 React와 JSX의 까다로운 부분"></a>3.4 React와 JSX의 까다로운 부분</h2><p>태그를 닫을 때 반드시 /를 넣어야 한다. </p>
+<h3 id="3-4-1-특수문자"><a href="#3-4-1-특수문자" class="headerlink" title="3.4.1 특수문자"></a>3.4.1 특수문자</h3><p>HTML엔터티코드를 사용하여 저작권 표시나 말바꿈표 따옴표 등을 사용할 수 있다.</p>
+<ul>
+<li><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ```mdash;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```js</span><br><span class="line">&lt;span&gt;&amp;copy;&amp;mdash;&amp;ldquo;&lt;/span&gt;</span><br><span class="line">&lt;input value =&quot;&amp;copy;&amp;mdash;&amp;ldquo;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>아래 코드는 작동하지 않는 오류 코드<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> specialChars = <span class="hljs-string">"&amp;copy;&amp;mdash;&amp;ldquo;"</span></span><br><span class="line">&lt;span&gt;&#123;specialChars&#125;&lt;<span class="hljs-regexp">/span&gt;</span></span><br><span class="line"><span class="hljs-regexp">&lt;input value=&#123;specialChars&#125;/</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>위험한 HTML구문에 대해서 자동으로 이스케이프를 적용함. 특수문자를 노출하려면 다음 방법중 하나를 선택한다.</p>
+<ul>
+<li>배열로 출력해 여러개의 분자열로 분리</li>
+<li>소스코드에 특수문자를 직접 복사해서 넣는다</li>
+<li>특스문자를 \u로 시작하는 이스케이프 시퀸스로 바꾼 후에 유니코드번호를 찾아 사용한다.</li>
+<li>String.fromCharCode(charCodeNumber)를 이용해서 유니코드 번호에서 문자로 변경한다</li>
+<li>React 엘리먼트의 _html에 dangerouslySetInnerHTML을 이용하는 방법이 있으나 추천하지 않는다</li>
+</ul>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/react/">react</a>, <a class="has-link-grey -link" href="/tags/tec/">tec</a>, <a class="has-link-grey -link" href="/tags/리엑트/">리엑트</a>, <a class="has-link-grey -link" href="/tags/프레임워크/">프레임워크</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/28/tec/react/react5/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">[React 교과서] 4장 React 컴포넌트의 객체 상태</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/13/tec/react/react3/">
+                <span class="level-item">[React 교과서] 2장 React 첫걸음</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://eunii.github.io/2019/08/14/tec/react/react4/';
+        this.page.identifier = '2019/08/14/tec/react/react4/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'crlo2' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/ap.jpg" alt="eunii">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        eunii
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        developer/traveler
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Galaxy</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        포스트
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        83
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        카테고리
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        태그
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eunii" target="_blank" rel="external nofollow noopener noreferrer">
+                팔로우</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-JSX의-정의와-장점">
+        <span class="has-mr-6">1</span>
+        <span>3.1 JSX의 정의와 장점</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-JSX의-이해">
+        <span class="has-mr-6">2</span>
+        <span>3.2 JSX의 이해</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-2-1-JSX로-React-엘리먼트-생성하기">
+        <span class="has-mr-6">2.1</span>
+        <span>3.2.1 JSX로 React 엘리먼트 생성하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-2-React-컴포넌트에-JSX-사용하기">
+        <span class="has-mr-6">2.2</span>
+        <span>3.2.2 React 컴포넌트에 JSX 사용하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-3-JSX에서-변수-출력하기">
+        <span class="has-mr-6">2.3</span>
+        <span>3.2.3 JSX에서 변수 출력하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-4-JSX에서-속성-사용하기">
+        <span class="has-mr-6">2.4</span>
+        <span>3.2.4 JSX에서 속성 사용하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-5-React-컴포넌트-메서드-생성하기">
+        <span class="has-mr-6">2.5</span>
+        <span>3.2.5 React 컴포넌트 메서드 생성하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-6-JSX의-if-else처리">
+        <span class="has-mr-6">2.6</span>
+        <span>3.2.6 JSX의 if/else처리</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-7-JSX의-주석-작성-방법">
+        <span class="has-mr-6">2.7</span>
+        <span>3.2.7 JSX의 주석 작성 방법</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-3-Babel을-이용한-JSX-트랜스-파일러-설정하기">
+        <span class="has-mr-6">3</span>
+        <span>3.3 Babel을 이용한 JSX 트랜스 파일러 설정하기</span>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Node-js-npm-설치">
+        <span class="has-mr-6">3.1.1</span>
+        <span>1. Node.js npm 설치</span>
+        </a></li></ul></ul></li><li>
+        <a class="is-flex" href="#3-4-React와-JSX의-까다로운-부분">
+        <span class="has-mr-6">4</span>
+        <span>3.4 React와 JSX의 까다로운 부분</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-4-1-특수문자">
+        <span class="has-mr-6">4.1</span>
+        <span>3.4.1 특수문자</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-JSX의-정의와-장점">
+        <span class="has-mr-6">1</span>
+        <span>3.1 JSX의 정의와 장점</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-JSX의-이해">
+        <span class="has-mr-6">2</span>
+        <span>3.2 JSX의 이해</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-2-1-JSX로-React-엘리먼트-생성하기">
+        <span class="has-mr-6">2.1</span>
+        <span>3.2.1 JSX로 React 엘리먼트 생성하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-2-React-컴포넌트에-JSX-사용하기">
+        <span class="has-mr-6">2.2</span>
+        <span>3.2.2 React 컴포넌트에 JSX 사용하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-3-JSX에서-변수-출력하기">
+        <span class="has-mr-6">2.3</span>
+        <span>3.2.3 JSX에서 변수 출력하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-4-JSX에서-속성-사용하기">
+        <span class="has-mr-6">2.4</span>
+        <span>3.2.4 JSX에서 속성 사용하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-5-React-컴포넌트-메서드-생성하기">
+        <span class="has-mr-6">2.5</span>
+        <span>3.2.5 React 컴포넌트 메서드 생성하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-6-JSX의-if-else처리">
+        <span class="has-mr-6">2.6</span>
+        <span>3.2.6 JSX의 if/else처리</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-7-JSX의-주석-작성-방법">
+        <span class="has-mr-6">2.7</span>
+        <span>3.2.7 JSX의 주석 작성 방법</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-3-Babel을-이용한-JSX-트랜스-파일러-설정하기">
+        <span class="has-mr-6">3</span>
+        <span>3.3 Babel을 이용한 JSX 트랜스 파일러 설정하기</span>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Node-js-npm-설치">
+        <span class="has-mr-6">3.1.1</span>
+        <span>1. Node.js npm 설치</span>
+        </a></li></ul></ul></li><li>
+        <a class="is-flex" href="#3-4-React와-JSX의-까다로운-부분">
+        <span class="has-mr-6">4</span>
+        <span>3.4 React와 JSX의 까다로운 부분</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-4-1-특수문자">
+        <span class="has-mr-6">4.1</span>
+        <span>3.4.1 특수문자</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="[React 교과서] 3장 JSX" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 eunii&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

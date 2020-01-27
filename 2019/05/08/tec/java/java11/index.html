@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>[CH12. 쓰레드] 프로세스와 쓰레드 - EUNII&#39;s BLOG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="naver-site-verification" content="5e444d80464ae52c42147e0db69d86752841928b">
+
+<link rel="canonical" href="https://eunii.github.io/2019/05/08/tec/java/java11/">
+
+    <meta name="description" content="1. 프로세스와 쓰레드프로세스(process)는 간단하게 말하면 실행중인 프로그램이다.프로그램 –실행–&amp;gt; 프로세스프로세스는 데이터, 메모리등의 자원과 쓰레드로 구성되어있음.프로세스의 자원을 이용해서 실제 작업을 수행하는 것.모든 프로세스는 최소 하나 이상의 쓰레드가 존재. 둘 이상이면 멀티쓰레드 프로세스라한다.    멀티쓰레딩의 장점 CPU의 사용률을">
+<meta name="keywords" content="java의 정석">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CH12. 쓰레드] 프로세스와 쓰레드">
+<meta property="og:url" content="https://eunii.github.io/2019/05/08/tec/java/java11/index.html">
+<meta property="og:site_name" content="EUNII&#39;s BLOG">
+<meta property="og:description" content="1. 프로세스와 쓰레드프로세스(process)는 간단하게 말하면 실행중인 프로그램이다.프로그램 –실행–&amp;gt; 프로세스프로세스는 데이터, 메모리등의 자원과 쓰레드로 구성되어있음.프로세스의 자원을 이용해서 실제 작업을 수행하는 것.모든 프로세스는 최소 하나 이상의 쓰레드가 존재. 둘 이상이면 멀티쓰레드 프로세스라한다.    멀티쓰레딩의 장점 CPU의 사용률을">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://eunii.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-05-13T07:16:07.295Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[CH12. 쓰레드] 프로세스와 쓰레드">
+<meta name="twitter:description" content="1. 프로세스와 쓰레드프로세스(process)는 간단하게 말하면 실행중인 프로그램이다.프로그램 –실행–&amp;gt; 프로세스프로세스는 데이터, 메모리등의 자원과 쓰레드로 구성되어있음.프로세스의 자원을 이용해서 실제 작업을 수행하는 것.모든 프로세스는 최소 하나 이상의 쓰레드가 존재. 둘 이상이면 멀티쓰레드 프로세스라한다.    멀티쓰레딩의 장점 CPU의 사용률을">
+<meta name="twitter:image" content="https://eunii.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140042371-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-140042371-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="[CH12. 쓰레드] 프로세스와 쓰레드" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/categories/tec/">Technology</a>
+                
+                <a class="navbar-item" href="/categories/trip/">Trip</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-08T11:40:25.000Z">2019-05-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/tec/">tec</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/tec/java/">java</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    25분 읽기 (나에 대하여 3706 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                [CH12. 쓰레드] 프로세스와 쓰레드
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-프로세스와-쓰레드"><a href="#1-프로세스와-쓰레드" class="headerlink" title="1. 프로세스와 쓰레드"></a>1. 프로세스와 쓰레드</h2><p>프로세스(process)는 간단하게 말하면 실행중인 프로그램이다.<br><strong>프로그램 –실행–&gt; 프로세스</strong><br>프로세스는 데이터, 메모리등의 자원과 쓰레드로 구성되어있음.<br>프로세스의 자원을 이용해서 실제 작업을 수행하는 것.<br>모든 프로세스는 최소 하나 이상의 쓰레드가 존재. 둘 이상이면 멀티쓰레드 프로세스라한다.  </p>
+<ul>
+<li>멀티쓰레딩의 장점<ul>
+<li>CPU의 사용률을 향상시킴.</li>
+<li>자원을 보다 효울적으로 사용할 수 있음.</li>
+<li>사용자에 대한 응답성이 향상됨.</li>
+<li>작업이 분리되어 코드가 간결해짐. </li>
+</ul>
+</li>
+</ul>
+<p>동기화(synhronization), 교착상태(deadlock)등을 고려해서 신중히 프로그래밍 해야함.</p>
+<h2 id="2-쓰레드의-구현과-실행"><a href="#2-쓰레드의-구현과-실행" class="headerlink" title="2. 쓰레드의 구현과 실행"></a>2. 쓰레드의 구현과 실행</h2><p>구현 방법</p>
+<ol>
+<li><p>Thread클래스 상속</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-comment">//Thread의 run()함수를 오버라이딩.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Runnable인터페이스 구현(일반적인 방법)</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span>  <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-comment">//추상메서드 run()을 구현</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx1</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;</span><br><span class="line">      ThreadEx1_1 t1 = <span class="hljs-keyword">new</span> ThreadEx1_1();</span><br><span class="line">      </span><br><span class="line">      Runnable r = <span class="hljs-keyword">new</span> ThreadEx1_2();</span><br><span class="line">      Thread t2 = <span class="hljs-keyword">new</span> Thread(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx1_1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;</span><br><span class="line">            System.out.println(getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx1_2</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>쓰레드 생성 후 start()를 호출해야 작업을 시작함.<br>한번 사용한 쓰레드는 다시 재사용할 수 없다. 하나의 쓰레드에 한번의 start()만 호출 될 수 있음.   </p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ThreadEx1_1 t1 = <span class="hljs-keyword">new</span> ThreadEx_1();</span><br><span class="line">t1.start();</span><br><span class="line">t.start();<span class="hljs-comment">//이건 불가능</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">ThreadEx1_1 t1 = <span class="hljs-keyword">new</span> ThreadEx1_1();</span><br><span class="line">t1.start();</span><br><span class="line">t1 = <span class="hljs-keyword">new</span> ThreadEx1_1();</span><br><span class="line">t.start();<span class="hljs-comment">//이건 가능</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-start-와-run"><a href="#3-start-와-run" class="headerlink" title="3. start()와 run()"></a>3. start()와 run()</h2><ul>
+<li>run()을 호출하는 것은 생성된 쓰레드를 실행하는 것이 아니라 단순히 클래스에속한 메서드를 하나 호출하는것.  </li>
+</ul>
+<hr>
+<p>call stack  </p>
+<p>run  </p>
+<h2 id="main"><a href="#main" class="headerlink" title="main  "></a>main  </h2><ul>
+<li>start()을 호출하는 것은 새로운 쓰레드가 작업을 실행하는데 필요한 호출스택을 생성한 후 run()을 호출해서 생성된 호출스택에 run()이 저장되게 한다.<br>모든 쓰레드는 독립적인 작업을 수행하기 위해 자신만의 호출스택을 필요로 하기 때문에 새로운 쓰레드를 생성하고 실행시킬때마다 새로운 호출스택이 생성되고 쓰레드가 종료되면 작업에 사용된 호출스택은 소멸된다.  </li>
+</ul>
+<ol>
+<li>main메서드에서 쓰레드의 start메서드를 호출한다.</li>
+<li>start메서드는 쓰레드가 작업을 수행하는데 사용될 새로운 호출 스택을 생성한다. </li>
+<li>생성된 호출스택에 run 메서드를 호출해서 쓰레드가 작업을 수행하도록 한다. </li>
+<li>이제는 호츨스택이 2개이기때문에 스케줄러가 정한 순서에 으해 번갈아 가면서 실행된다.   </li>
+</ol>
+<p>실행중인 쓰레드가 하나도 없을때 프로그램은 종료된다.</p>
+<h2 id="4-싱글쓰레드와-멀티쓰레드"><a href="#4-싱글쓰레드와-멀티쓰레드" class="headerlink" title="4. 싱글쓰레드와 멀티쓰레드"></a>4. 싱글쓰레드와 멀티쓰레드</h2><p>두개의 작업을 하나의 쓰레드로 하면 한 작업 끝난 후 다른 작업 끝.<br>두개의 작업을 두개의 쓰레드로 하면 짧은시간동안 쓰레드 2개가 번갈아 가면서 작업을 수행해서 동시에 두 작업이 처리되는것과 같다고 느낌.<br>CPU만 사용하는 계산 작업이면 멀티쓰레드가 전환하는 시간때문에 오히려 느림.<br>CPU외 자원을 사용하는 경우 싱글쓰레드 프로세스 보다 멀티쓰레드프로세스가 더 효율적임.<br>ex)외부기기에서 입출력 받는 경우<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> javax.swing.JOptionPane;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx6</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        String input = JOptionPanel.showInputDialog(<span class="hljs-string">"아무 값이나 입력하세요."</span>);</span><br><span class="line">        System.out.println(<span class="hljs-string">"입력하신 값은 "</span>+input+<span class="hljs-string">"입니다."</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">10</span>; i &gt; <span class="hljs-number">0</span> ; i--) &#123;</span><br><span class="line">          System.out.println(i);</span><br><span class="line">          <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">              Thread.sleep(<span class="hljs-number">1000</span>);</span><br><span class="line">          &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>위의 예는 입력을 받은 후 출력하기 때문에 사용자가 입력하는 동안에는 출력 작업이 일어나지 않는다.<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> javax.swing.JOptionPane;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx7</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        </span><br><span class="line">        ThreadEx7_1 th1 = <span class="hljs-keyword">new</span> ThreadEx7_1();</span><br><span class="line">        th1.start();</span><br><span class="line">        </span><br><span class="line">        String input = JOptionPanel.showInputDialog(<span class="hljs-string">"아무 값이나 입력하세요."</span>);</span><br><span class="line">        System.out.println(<span class="hljs-string">"입력하신 값은 "</span>+input+<span class="hljs-string">"입니다."</span>);</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx7_1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">10</span>; i &gt; <span class="hljs-number">0</span> ; i--) &#123;</span><br><span class="line">           System.out.println(i);</span><br><span class="line">           <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">                Thread.sleep(<span class="hljs-number">1000</span>);</span><br><span class="line">           &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">          </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>위의 코드는 입력받는 동안 출력되고 입력된 값이 출력되고 또 출력이 된다.</p>
+<h2 id="5-쓰레드의-우선순위"><a href="#5-쓰레드의-우선순위" class="headerlink" title="5. 쓰레드의 우선순위"></a>5. 쓰레드의 우선순위</h2><p>쓰레드에 우선순위(priority)의 멤버변수가 있다.<br>우선순위의 범위는 1~10이고 숫자가 높을수록 더 우선순위가 높다.<br>우선순위의 값은 상대적이다. 1,2와 8,9의 결과 값이 같다.<br>우선순위는 쓰레드생성한 쓰레드로부터 상속받는다.<br>main 메서드를 수행하는 쓰레드의 우선순위는 5.<br>파일 다운로드와 채팅기능 중 채팅에 더 우선순위를 높여야 한다.<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setPripority</span><span class="hljs-params">(<span class="hljs-keyword">int</span> new Priority)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getPriority</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_PRIORITY =<span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_PRIORITY =<span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> NORM_PRIORITY = <span class="hljs-number">5</span>;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx9</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        </span><br><span class="line">        ThreadEx9_1 th1 = <span class="hljs-keyword">new</span> ThreadEx9_1();</span><br><span class="line">        ThreadEx9_2 th2 = <span class="hljs-keyword">new</span> ThreadEx9_2();</span><br><span class="line">        th2.setPriority(<span class="hljs-number">7</span>);</span><br><span class="line">        System.out.println(<span class="hljs-string">"입력하신 값은 "</span>+input+<span class="hljs-string">"입니다."</span>);</span><br><span class="line">        th1.start();</span><br><span class="line">        th2.start();       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx9_1</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"-"</span>);</span><br><span class="line">          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1000000</span> ; j++) &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx9_2</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"|"</span>);</span><br><span class="line">          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1000000</span> ; j++) &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위 결과는 |가 먼저 끝나고, - 이 완료된다.</p>
+<h2 id="6-쓰레드-그룹-thread-group"><a href="#6-쓰레드-그룹-thread-group" class="headerlink" title="6. 쓰레드 그룹(thread group)"></a>6. 쓰레드 그룹(thread group)</h2><p>서로 관련된 쓰레드를 그룹으로 다루기 위한것.<br>폴더를 생성해서 관련된 파일을 묶어 관리하는것처럼 쓰레드도 그룹으로 묶어서 관리.<br>쓰레드를 쓰레드 그룹에 포함시키려면 Thread생성자를 이용해야함<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread(ThreadGroup group, String name)</span><br><span class="line">Thread(ThreadGroup gorup, Runnable target)</span><br></pre></td></tr></table></figure></p>
+<h2 id="7-데몬쓰레드-deamon-thread"><a href="#7-데몬쓰레드-deamon-thread" class="headerlink" title="7. 데몬쓰레드(deamon thread)"></a>7. 데몬쓰레드(deamon thread)</h2><p>데몬쓰레드는 일반 쓰레드의 작업을 돕는 보조역할.<br>일반쓰레드 작업이끝나면 데몬 쓰레드는 강제종료됨.<br>ex) 가비지컬렉터, 위드프로세서 자동저장, 화면자동갱신<br>무한루프와 조건문을 이용해서 실행 후 대기하고 있다가 특정 조건이 되면 작업 수행하고 다시 대기.  </p>
+<h2 id="8-쓰레드의-실행제어"><a href="#8-쓰레드의-실행제어" class="headerlink" title="8. 쓰레드의 실행제어"></a>8. 쓰레드의 실행제어</h2><p>쓰레드 프로그램이 어렵게 느껴지는 건 동기화와 스케줄링때문임.  </p>
+<ul>
+<li>쓰레드 스케쥴링과 관련된 메서드  </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>생성자/메서드</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void interupt()</td>
+<td>sleep()이나 join()에 의해 일시정지상태인 쓰레드를 실행대기상태로 만든다.<br> 해당 쓰레드에서는 interuptedExcetption이 발생함으로써 일시정지상태를 벗어나게 된다.</td>
+</tr>
+<tr>
+<td>void join()<br>void join(long millis) <br> void join(long millis, int nanos)</td>
+<td>지정된 시간동안 쓰레드가 실행되도록한다. 지정된 시간이 자나거나 작업이 종료되면 join()을 호출한 쓰레드로 다시 돌아와 실행을 계속한다.</td>
+</tr>
+<tr>
+<td>void resume()</td>
+<td>supend()에 의해 일시정지상태에 있는 쓰레드를 실행대기 상태로 만든다.</td>
+</tr>
+<tr>
+<td>static void sleep(long millis)<br>static void sleep(long millis, int nanos)</td>
+<td>지정된 시간( 천분의 일초 단위) 동안 쓰레드를 일시정지 시킨다. 지정한 시간이 지나고 나면 자동적으로 다시 실행대기가 된다.</td>
+</tr>
+<tr>
+<td>void stop()</td>
+<td>쓰레드를 즉시 종료시킨다. 교착상태(dead-lock)에 빠지기 쉽기 때문에 deprecated되었다.</td>
+</tr>
+<tr>
+<td>void suspend()</td>
+<td>쓰레드를 일시정지시킨다. resume()을 호출하면 다시 실행대기상태가 된다.</td>
+</tr>
+<tr>
+<td>satic void yield()</td>
+<td>실행중에 다른 쓰레드에게 양보하고 실행대기상태가 된다.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>쓰레드의 상태  </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NEW</td>
+<td>쓰레드가 생성되고 아직 start()가 호출되지 않은 상태</td>
+</tr>
+<tr>
+<td>RUNNABLE</td>
+<td>실행 중 또는 실행 가능한 상태</td>
+</tr>
+<tr>
+<td>BLOCKED</td>
+<td>동기화 블럭에 의해서 일시정지된 상태(Lock이 풀릴때까지 기다리는 상태)</td>
+</tr>
+<tr>
+<td>WATING, <br>TIMED_WATING</td>
+<td>쓰레드의 작업이 종료되지는 않았지만 실행가능하지 않은 일시정지 상태. TIMED_WATEING은 일시정지시간이 지정된 경우를 의미한다.</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td>쓰레드의 작업이 종료된 상태</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>쓰레드 생성하고 start()을 호출하면 실행대기열에 저장. 순서를 기다림. Quequ와같은 구조로 먼저 실행대기열에 들어온 쓰레드가 먼저 실행됨.  </li>
+<li>실행대기상태이다가 자기 차례가 오면 실행상태가 됨.</li>
+<li>주어진 실행시간이 다되거나 yeild()를 만나면 다시 실행대기 상태가 되고 다음 차례의 쓰레드가 실행상태가 됨.</li>
+<li>실행중 suspend(), sleep(), wait(), join(), I/O block에 의해 일시정지상태가 딜 수 있음.</li>
+<li>지정된 일시정지 시간이 지나거나 notify(), reusme(), interrup()가 호출되면 일시정지 상태를 벗어나 다시 실행대기열에 들어가 순서를 기다림.</li>
+<li>실행을 모두 마치거나 stop()이 호출되면 쓰레드는 소멸됨.  </li>
+</ol>
+<ul>
+<li><p>join()을 사용한 예시</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx13</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> startTime=<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        </span><br><span class="line">        ThreadEx13_1 th1 = <span class="hljs-keyword">new</span> ThreadEx13_1();</span><br><span class="line">        ThreadEx13_2 th2 = <span class="hljs-keyword">new</span> ThreadEx13_2();</span><br><span class="line">        th1.start();</span><br><span class="line">        th2.start();      </span><br><span class="line">        startTime = System.currentTimeMillis();</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">            th1.join();<span class="hljs-comment">//th1의 작업이 끝날때까지 기다린다.</span></span><br><span class="line">            th2.join();<span class="hljs-comment">//th2의 작업이 끝날때까지 기다린다.</span></span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span> (InterruptedException e)&#123;&#125;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="hljs-string">"소요시간:"</span> + (System.currentTimeMillis()- ThreadEx13.startTime));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx13_1</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"-"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="hljs-comment">//run()</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx13_2</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"|"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-comment">//run()</span></span><br><span class="line">&#125;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">join()을 사용하지 않으면 main 쓰레드는 바로 종료되지만, join()을 사용해서 th1과 th2의 작업이 마칠때까지 main쓰레드가 기다림  </span><br><span class="line">- 쓰레드가 순차적으로 실행되어야 할때 사용하는 예제.    </span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx14</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> startTime=<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        </span><br><span class="line">        ThreadEx14_1 th1 = <span class="hljs-keyword">new</span> ThreadEx14_1();</span><br><span class="line">        ThreadEx14_2 th2 = <span class="hljs-keyword">new</span> ThreadEx14_2();</span><br><span class="line">        th1.start();</span><br><span class="line">    </span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">            th1.join();</span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span> (InterruptedException e)&#123;&#125;</span><br><span class="line">        th2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx14_1</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"-"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="hljs-comment">//run()</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx14_2</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"|"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>아래 코드는 th1, th2, Main쓰레드 순으로 종료됨  </p>
+</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx15</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> startTime=<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        </span><br><span class="line">        ThreadEx15_1 th1 = <span class="hljs-keyword">new</span> ThreadEx15_1();</span><br><span class="line">        ThreadEx15_2 th2 = <span class="hljs-keyword">new</span> ThreadEx15_2();</span><br><span class="line">        th1.start();</span><br><span class="line">        th2.start();</span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">            th1.sleep();</span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span> (InterruptedException e)&#123;&#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"&lt;&lt;main종료&gt;&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx15_1</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"-"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"&lt;&lt;TH1종료&gt;&gt;"</span>);</span><br><span class="line">    &#125;<span class="hljs-comment">//run()</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx15_2</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span> ; i++) &#123;</span><br><span class="line">          System.out.println(<span class="hljs-string">"|"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"&lt;&lt;TH2종료&gt;&gt;"</span>);</span><br><span class="line">    &#125; <span class="hljs-comment">//run()</span></span><br><span class="line">&#125;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">왜 th1이 sleep()으로 잠들어있어도 가장 먼저 종료될까?  </span><br><span class="line">sleep()이 항상 현재 실행중인 쓰레드에 대해 작동해서 th1.sleep()호출해도 main메서드를 실행하는 main쓰레드가 영향받는다.   </span><br><span class="line"><span class="hljs-keyword">static</span>으로 선언되어 있어서 참조변수로 sleep()을 호출하기 보다는 Thread.sleep()이렇게 호츨해야 함.</span><br><span class="line"></span><br><span class="line">## 9. 쓰레드의 동기화  </span><br><span class="line">멀티쓰레드는 여러 쓰레드가 같은 프로세스내의 자원을 공유하기 때문에 데이터가 원래 의도했더것과는 다르게 변경 될 수 있음.  </span><br><span class="line"></span><br><span class="line">### 9.1 synchorized를 이용한 동기화  </span><br><span class="line">공유 데이터에 lock을 걸어 먼저 작업중이던 쓰레드가 작업을 완전히 마칠때까지는 다른 쓰레드에게 제어권이 넘어가도 데이터가 변경되지 않도록 보호함.  </span><br><span class="line"></span><br><span class="line">- <span class="hljs-keyword">synchronized</span> 사용방법 두가지.  </span><br><span class="line">가능하면 메서드에 <span class="hljs-keyword">synchronized</span>를 사용하는 메서드 단위 동기화를 권장함.  </span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="hljs-comment">// 1. 특정한 객체에 lock을 걸고자 할때</span></span><br><span class="line">    sysnchronized(객체의 참조변수)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"><span class="hljs-comment">// 2. 메서드에 lock을 걸고자 할때</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">calcSum</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>synchronized를 이용해서 객체를 동기화 하면 쓰레드가 교착상태에 빠질 수 있다.<br>교착상태란 구 쓰레드가 lock이 된 상태로 서로 lock가 풀리기를 무한정 기다리게 되는상황.  </p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx21</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;</span><br><span class="line">      RunnbaleImpl r =  <span class="hljs-keyword">new</span> RunnableImpl();</span><br><span class="line">      Thread th1 = <span class="hljs-keyword">new</span> Thread(r);</span><br><span class="line">      Thread th2 = <span class="hljs-keyword">new</span> Thread(r);</span><br><span class="line">      th1.start();</span><br><span class="line">      th2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RunnableTmpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> iv = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> lv = <span class="hljs-number">0</span>;</span><br><span class="line">        String name = Thread.currentThread().getName();</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">while</span>(lv&lt;<span class="hljs-number">3</span>)&#123;</span><br><span class="line">            System.out.println(name+<span class="hljs-string">"Local var: "</span>+ ++lv);</span><br><span class="line">            System.out.println(name+<span class="hljs-string">"Instance var: "</span>+ ++iv);</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>실행결과<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Thread-<span class="hljs-number">0</span> Local <span class="hljs-keyword">var</span>: <span class="hljs-number">1</span></span><br><span class="line">Thread-<span class="hljs-number">0</span> Instance <span class="hljs-keyword">var</span>: <span class="hljs-number">1</span> </span><br><span class="line"></span><br><span class="line">Thread-<span class="hljs-number">0</span> Local <span class="hljs-keyword">var</span>: <span class="hljs-number">2</span></span><br><span class="line">Thread-<span class="hljs-number">0</span> Instance <span class="hljs-keyword">var</span>: <span class="hljs-number">2</span> </span><br><span class="line"></span><br><span class="line">Thread-<span class="hljs-number">0</span> Local <span class="hljs-keyword">var</span>: <span class="hljs-number">3</span></span><br><span class="line">Thread-<span class="hljs-number">0</span> Instance <span class="hljs-keyword">var</span>: <span class="hljs-number">3</span> </span><br><span class="line"></span><br><span class="line">Thread-<span class="hljs-number">0</span> Local <span class="hljs-keyword">var</span>: <span class="hljs-number">1</span></span><br><span class="line">Thread-<span class="hljs-number">0</span> Instance <span class="hljs-keyword">var</span>: <span class="hljs-number">4</span> </span><br><span class="line"></span><br><span class="line">Thread-<span class="hljs-number">0</span> Local <span class="hljs-keyword">var</span>: <span class="hljs-number">2</span></span><br><span class="line">Thread-<span class="hljs-number">0</span> Instance <span class="hljs-keyword">var</span>: <span class="hljs-number">5</span> </span><br><span class="line"></span><br><span class="line">Thread-<span class="hljs-number">0</span> Local <span class="hljs-keyword">var</span>: <span class="hljs-number">3</span></span><br><span class="line">Thread-<span class="hljs-number">0</span> Instance <span class="hljs-keyword">var</span>: <span class="hljs-number">6</span></span><br></pre></td></tr></table></figure></p>
+<p> 여기서 인스턴스변수 iv는 main, th1, th2 쓰레드 모두 접근이 가능함.(쓰레드간의 변수 공유)<br> lv는 지역변수라 각 쓰레드 스택내에서 생성되어 공유되지 않는다.</p>
+<ul>
+<li>다음은 동기화가 잘 되지 않아 데이터 값이 변형된 예제.<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadEx24</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;</span><br><span class="line">      RunnbaleImpl r =  <span class="hljs-keyword">new</span> RunnableImpl();</span><br><span class="line">            Thread th1 = <span class="hljs-keyword">new</span> Thread(r);</span><br><span class="line">            Thread th2 = <span class="hljs-keyword">new</span> Thread(r);</span><br><span class="line">            th1.start();</span><br><span class="line">            th2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> balance =<span class="hljs-number">1000</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">withdraw</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> money)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(balance&gt;=money)&#123;</span><br><span class="line">            <span class="hljs-keyword">try</span>&#123; Thread.sleep(<span class="hljs-number">1000</span>);&#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">            balance -=money;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="hljs-comment">//withdraw</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RunnableEx24</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;</span><br><span class="line">    Account acc = <span class="hljs-keyword">new</span> Account();</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">while</span>(acc.balance &gt; <span class="hljs-number">0</span>)&#123;</span><br><span class="line">            <span class="hljs-comment">//100, 200, 300중의 한 값을 임의로 선택해서 출금</span></span><br><span class="line">            <span class="hljs-keyword">int</span> money = (<span class="hljs-keyword">int</span>)(Math.random()*<span class="hljs-number">3</span>+<span class="hljs-number">1</span>)*<span class="hljs-number">100</span>;</span><br><span class="line">            acc.withdraw(money);</span><br><span class="line">            System.out.println(<span class="hljs-string">"balance:"</span>+acc.balance);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="hljs-comment">//run()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>실행 결과<br><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">balance:<span class="hljs-number">700</span></span><br><span class="line">balance:<span class="hljs-number">400</span></span><br><span class="line">balance:<span class="hljs-number">200</span></span><br><span class="line">balance:<span class="hljs-number">0</span></span><br><span class="line">balance:-<span class="hljs-number">100</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">잔고(balance)가 임의의 출금금액(money)보다 클 경우에만 출금하도록 되어있는데 잔고에 -<span class="hljs-number">100</span>이 나왔음.  </span><br><span class="line"><span class="hljs-keyword">if</span>조건문 통과하고 출금직전에 다른쓰레드가 끼어들어서 먼저 출금했기때문이다.  </span><br><span class="line"><span class="hljs-keyword">if</span>문과 출금하는 기능은 하나로 <span class="hljs-keyword">synchronized</span>되어야 한다.  </span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">withdraw</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> money)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(balance&gt;=money)&#123;</span><br><span class="line">        <span class="hljs-keyword">try</span>&#123; Thread.sleep(<span class="hljs-number">1000</span>);&#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">        balance -=money;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="hljs-comment">//withdraw</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">withdraw</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> money)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span>(<span class="hljs-keyword">this</span>)&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(balance&gt;=money)&#123;</span><br><span class="line">            <span class="hljs-keyword">try</span>&#123; Thread.sleep(<span class="hljs-number">1000</span>);&#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">            balance -=money;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="hljs-comment">//withdraw</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="9-2-wait-과-notify"><a href="#9-2-wait-과-notify" class="headerlink" title="9.2 wait()과 notify()"></a>9.2 wait()과 notify()</h3><p> 쓰레드를 동기화 할때 효율을 높이기 위해 사용할 수 있다.<br> 한쓰레드가 lock걸려 다른 쓰레드는 lock이 풀릴때까지 기다려야 되는 상황이 있음.<br> 쓰레드에 lock을 걸는것 대신에 wait()을 호출해서 다른 쓰레드에 제어권을 넘겨주고 대기상태로 기다리다가 다른쓰레드에 의해 notify()가 호출되면 다시 실행상태가 되도록 함<br> wait()과 notify()는  Object클래스에서 정의되서 모든 객체에서 호출이 가능함.<br> 동기화 블록 내에서만 사용가능. 쓰레드가 wait()을 호출하면 그때까지 걸어 놓은 lock을 풀고 대기실에 들어가기 됨.<br> notify()는 객체의 wating pool에 있는 쓰레드 중 하나만 깨움.</p>
+<ul>
+<li>wait(), notify(), notifyAll()<ul>
+<li>Object에 정의 되어있다.</li>
+<li>동기화 블록(synchronized)내에서만 사용할 수 있다. </li>
+<li>보다 효율적인 동기화를 가능하게 한다.  </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> balance =<span class="hljs-number">1000</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">withdraw</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> money)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(balance&gt;=money)&#123;</span><br><span class="line">            <span class="hljs-keyword">try</span>&#123; </span><br><span class="line">                wait();</span><br><span class="line">            &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">            balance -=money;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="hljs-comment">//withdraw</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">desposit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> money)</span></span>&#123;</span><br><span class="line">    balance += money;</span><br><span class="line">    notify();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java의-정석/">java의 정석</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/10/tec/java/java12/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">[CH15. 네트워킹(Networking)] 네트워킹</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/07/tec/java/java9/">
+                <span class="level-item">[CH7. 객체지향프로그래밍2] 추상클래스</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://eunii.github.io/2019/05/08/tec/java/java11/';
+        this.page.identifier = '2019/05/08/tec/java/java11/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'crlo2' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/ap.jpg" alt="eunii">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        eunii
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        developer/traveler
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Galaxy</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        포스트
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        83
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        카테고리
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        태그
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eunii" target="_blank" rel="external nofollow noopener noreferrer">
+                팔로우</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-프로세스와-쓰레드">
+        <span class="has-mr-6">1</span>
+        <span>1. 프로세스와 쓰레드</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-쓰레드의-구현과-실행">
+        <span class="has-mr-6">2</span>
+        <span>2. 쓰레드의 구현과 실행</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-start-와-run">
+        <span class="has-mr-6">3</span>
+        <span>3. start()와 run()</span>
+        </a></li><li>
+        <a class="is-flex" href="#main">
+        <span class="has-mr-6">4</span>
+        <span>main  </span>
+        </a></li><li>
+        <a class="is-flex" href="#4-싱글쓰레드와-멀티쓰레드">
+        <span class="has-mr-6">5</span>
+        <span>4. 싱글쓰레드와 멀티쓰레드</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-쓰레드의-우선순위">
+        <span class="has-mr-6">6</span>
+        <span>5. 쓰레드의 우선순위</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-쓰레드-그룹-thread-group">
+        <span class="has-mr-6">7</span>
+        <span>6. 쓰레드 그룹(thread group)</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-데몬쓰레드-deamon-thread">
+        <span class="has-mr-6">8</span>
+        <span>7. 데몬쓰레드(deamon thread)</span>
+        </a></li><li>
+        <a class="is-flex" href="#8-쓰레드의-실행제어">
+        <span class="has-mr-6">9</span>
+        <span>8. 쓰레드의 실행제어</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#9-2-wait-과-notify">
+        <span class="has-mr-6">9.1</span>
+        <span>9.2 wait()과 notify()</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-프로세스와-쓰레드">
+        <span class="has-mr-6">1</span>
+        <span>1. 프로세스와 쓰레드</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-쓰레드의-구현과-실행">
+        <span class="has-mr-6">2</span>
+        <span>2. 쓰레드의 구현과 실행</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-start-와-run">
+        <span class="has-mr-6">3</span>
+        <span>3. start()와 run()</span>
+        </a></li><li>
+        <a class="is-flex" href="#main">
+        <span class="has-mr-6">4</span>
+        <span>main  </span>
+        </a></li><li>
+        <a class="is-flex" href="#4-싱글쓰레드와-멀티쓰레드">
+        <span class="has-mr-6">5</span>
+        <span>4. 싱글쓰레드와 멀티쓰레드</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-쓰레드의-우선순위">
+        <span class="has-mr-6">6</span>
+        <span>5. 쓰레드의 우선순위</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-쓰레드-그룹-thread-group">
+        <span class="has-mr-6">7</span>
+        <span>6. 쓰레드 그룹(thread group)</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-데몬쓰레드-deamon-thread">
+        <span class="has-mr-6">8</span>
+        <span>7. 데몬쓰레드(deamon thread)</span>
+        </a></li><li>
+        <a class="is-flex" href="#8-쓰레드의-실행제어">
+        <span class="has-mr-6">9</span>
+        <span>8. 쓰레드의 실행제어</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#9-2-wait-과-notify">
+        <span class="has-mr-6">9.1</span>
+        <span>9.2 wait()과 notify()</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="[CH12. 쓰레드] 프로세스와 쓰레드" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 eunii&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

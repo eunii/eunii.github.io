@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>[React 교과서] 4장 React 컴포넌트의 객체 상태 - EUNII&#39;s BLOG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="naver-site-verification" content="5e444d80464ae52c42147e0db69d86752841928b">
+
+<link rel="canonical" href="https://eunii.github.io/2019/08/28/tec/react/react5/">
+
+    <meta name="description" content="리엑트 교과서를 정리한 내용입니다.  리엑트에서 가장 중요한 부분이다. 4.1 React컴포넌트의 상태란?React의 상태는 컴포넌트의 변경 가능한 데이터 저장소이다.컴포넌트를 속성과 상태가 있는 함수라고 생각하면 함수의 결과가 UI표현(뷰)이다.속성과 상태는 모두 뷰를 갱신하기 위해 사용하지만 목적이 다름.    상태:상태는 이름을 활용하여 접근함. t">
+<meta name="keywords" content="tec,react,프레임워크,리엑트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[React 교과서] 4장 React 컴포넌트의 객체 상태">
+<meta property="og:url" content="https://eunii.github.io/2019/08/28/tec/react/react5/index.html">
+<meta property="og:site_name" content="EUNII&#39;s BLOG">
+<meta property="og:description" content="리엑트 교과서를 정리한 내용입니다.  리엑트에서 가장 중요한 부분이다. 4.1 React컴포넌트의 상태란?React의 상태는 컴포넌트의 변경 가능한 데이터 저장소이다.컴포넌트를 속성과 상태가 있는 함수라고 생각하면 함수의 결과가 UI표현(뷰)이다.속성과 상태는 모두 뷰를 갱신하기 위해 사용하지만 목적이 다름.    상태:상태는 이름을 활용하여 접근함. t">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://eunii.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-08-29T02:01:15.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[React 교과서] 4장 React 컴포넌트의 객체 상태">
+<meta name="twitter:description" content="리엑트 교과서를 정리한 내용입니다.  리엑트에서 가장 중요한 부분이다. 4.1 React컴포넌트의 상태란?React의 상태는 컴포넌트의 변경 가능한 데이터 저장소이다.컴포넌트를 속성과 상태가 있는 함수라고 생각하면 함수의 결과가 UI표현(뷰)이다.속성과 상태는 모두 뷰를 갱신하기 위해 사용하지만 목적이 다름.    상태:상태는 이름을 활용하여 접근함. t">
+<meta name="twitter:image" content="https://eunii.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140042371-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-140042371-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="[React 교과서] 4장 React 컴포넌트의 객체 상태" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/categories/tec/">Technology</a>
+                
+                <a class="navbar-item" href="/categories/trip/">Trip</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-28T08:26:25.000Z">2019-08-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/tec/">tec</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/tec/react/">react</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11분 읽기 (나에 대하여 1609 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                [React 교과서] 4장 React 컴포넌트의 객체 상태
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>리엑트 교과서를 정리한 내용입니다.</p>
+</blockquote>
+<p>리엑트에서 가장 중요한 부분이다.</p>
+<h2 id="4-1-React컴포넌트의-상태란"><a href="#4-1-React컴포넌트의-상태란" class="headerlink" title="4.1 React컴포넌트의 상태란?"></a>4.1 React컴포넌트의 상태란?</h2><p>React의 상태는 컴포넌트의 변경 가능한 데이터 저장소이다.<br>컴포넌트를 속성과 상태가 있는 함수라고 생각하면 함수의 결과가 UI표현(뷰)이다.<br>속성과 상태는 모두 뷰를 갱신하기 위해 사용하지만 목적이 다름.  </p>
+<ul>
+<li>상태:<br>상태는 이름을 활용하여 접근함. this.state 객체속성 ex) this.state.inputFileValue<br>뷰의 랜더링이 갱신될 때 동적 정보를 출력하기 위해 사용됨.<br>관련된 부분만 갱신됨.</li>
+</ul>
+<p>아래 안티 패턴 예시<br>상태 외의 다른 값을 변경해도 뷰를 갱신할 수 없다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> inputValue =<span class="hljs-string">'Texas'</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Autocomplete</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">    updateValues()&#123; <span class="hljs-comment">//--사용자 입력에 의해 실행됨</span></span><br><span class="line">        <span class="hljs-keyword">this</span>.props.inputValue = <span class="hljs-string">'California'</span></span><br><span class="line">        inputValue =<span class="hljs-string">'California'</span></span><br><span class="line">        <span class="hljs-keyword">this</span>.inputValue=<span class="hljs-string">'California'</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span>(</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            &#123;<span class="hljs-keyword">this</span>.props.inputValue&#125;</span><br><span class="line">            &#123;inputValue&#125;</span><br><span class="line">            &#123;<span class="hljs-keyword">this</span>.inputValue&#125;</span><br><span class="line">            &lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">        )</span></span><br><span class="line"><span class="hljs-regexp">    &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>속성은 부모 컴포넌트에서 새로운 값을 전달하면 뷰를 갱신하여 현재 다루는 자식 컴포넌트의 새로운 인스턴스를 생성함.<br>해당 자식 컴포넌트의 컨텍스트내에서 this.props.inputValue=’California’로 변경해도 소용이 없음!</p>
+<h2 id="4-2-상태-객체-다루기"><a href="#4-2-상태-객체-다루기" class="headerlink" title="4.2 상태 객체 다루기"></a>4.2 상태 객체 다루기</h2><h3 id="4-2-1-상태-객체에-접근하기"><a href="#4-2-1-상태-객체에-접근하기" class="headerlink" title="4.2.1 상태 객체에 접근하기"></a>4.2.1 상태 객체에 접근하기</h3><p>맴버변수로 this 를 통해 접근 가능. this.state.name와 같은 방식으로 접근.<br>render()에서 this.state를 랜더링 할 수 있음. ex) {this.state.inputFieldValue}</p>
+<ul>
+<li>현재 시간 출력하는 시계 구현하기<ul>
+<li>폴더 구조<br> /clock  <pre><code>index  
+</code></pre>  /jsx  <pre><code>script.jsx  
+clock.jsx  
+</code></pre>  /js  <pre><code>script.js  
+clock.js  
+react.js  
+react-dom.js  
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Clock</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;this.state.currentTime&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;Clock/&gt;</span><br><span class="line">    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>위와 같이 하면 ‘currentTime’ 값이 null이라는 오류가 발생한다.<br>속성과 달리 상태는 부모 객체에서 설정하는것이 아니고 render()안에서 setState를 실행 할 수도 없다.</p>
+<h3 id="4-2-2-초기-상태-설정하기"><a href="#4-2-2-초기-상태-설정하기" class="headerlink" title="4.2.2 초기 상태 설정하기"></a>4.2.2 초기 상태 설정하기</h3><p>초기 상태를 설정하려면 React.Component를 사용하는 ES6클래스의 생성자에서 this.state를 선언함. 반드시 super()에 속성을 전달하여 실행한다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFancyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(props)</span><br><span class="line">        <span class="hljs-keyword">this</span>.state = &#123;...&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>초기 상태를 설정하면서 다른 로직도 추가 가능.<br>ex) new Date()를 사용하여 currentTime 값을 설정함. toLocaleString()을 사용하면 상용자 위치에 맞는 적절한 날짜시간 형식을 보여줄 수 있음.  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Clock</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(props)</span><br><span class="line">        <span class="hljs-keyword">this</span>.state=&#123;<span class="hljs-attr">currentTime</span>: (<span class="hljs-keyword">new</span> DAte()).toLocaleString(<span class="hljs-string">'en'</span>)&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>초기 상태 주의사항</p>
+<ul>
+<li>this.state는 반드시 객체여야함.  </li>
+<li>생성자 메서드의 이름은 반드시 constructor로 함.   </li>
+<li>부며 클래스가 있는 클래스에서 construtcor()매서드를 생성하면 항상 super()를 호출함.</li>
+<li>상속으로 클래스를 구현하면 constructor()매서드를 따로 작성하지 않으면 super()를 호출한것으로 가정함.</li>
+<li>constructor()메서드 내에서 한번만 this.state로 직접 상태를 선언하고 그 외 부분에서는 this.stat=…로 직접 상태 선언하지 않는다.  </li>
+</ul>
+<h3 id="4-2-3-상태-갱신하기"><a href="#4-2-3-상태-갱신하기" class="headerlink" title="4.2.3 상태 갱신하기"></a>4.2.3 상태 갱신하기</h3><p>클래스 매서드인 this.setState(data, callback)를 사용하면 상태 변경 가능.<br>data를 현재 상태에 병합하고 render()을 호출, 이후 callback함수 실행됨.<br>setState()가 비동기로 작동함.  </p>
+<p>시계를 시작하려면 setInterval()을 한번 호출해야함.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Clock</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    counstructor(props)&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(props)</span><br><span class="line">        <span class="hljs-keyword">this</span>.lauchClock()</span><br><span class="line">        <span class="hljs-keyword">this</span>.state =&#123;</span><br><span class="line">            currentTime: (<span class="hljs-keyword">new</span> DAte()).toLocaleString(<span class="hljs-string">'en'</span>)</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">    launchClock()&#123;</span><br><span class="line">        setInterval(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span> &#123;</span><br><span class="line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updating time...'</span>)</span><br><span class="line">            <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">            currentTime: (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()).toLocaleString(<span class="hljs-string">'en'</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;, <span class="hljs-number">1000</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Rendering Clock...'</span>)</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;this.state.currentTime&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>setState()로 상태를 교체할때 상태 항목이 여러개 있으면 명시해준것만 바뀌고 나머진 값이 그대로임.<br>setState()가 render()를 실행시킴.  </p>
+<h2 id="4-3-상태-객체와-속성"><a href="#4-3-상태-객체와-속성" class="headerlink" title="4.3 상태 객체와 속성"></a>4.3 상태 객체와 속성</h2><p>상태 객체와 속성은 모두 클래스의 맴버이며 각각 this.state와 this.props를 말함.  </p>
+<ul>
+<li>상태 객체 vs 속성 객체<ul>
+<li>상태 객체는 변경가능, 속성 객체는 변경 불가능.  </li>
+<li>상태는 해당 컴포넌트 자체에서 정의, 속성은 부모 컴포넌트에서 전달(부모컴포넌트에서만 값을 변경 가능함).</li>
+<li>상태는 컴포넌트에서 설정되고 갱신, 속성은 뷰 생성시에 정해지고 변경안됨.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-4-상태비저장-컴포넌트"><a href="#4-4-상태비저장-컴포넌트" class="headerlink" title="4.4 상태비저장 컴포넌트"></a>4.4 상태비저장 컴포넌트</h2><ul>
+<li>상태비저장 컴포넌트는 상태 객체가 없고 이벤트 또는 메서드를 갖지 않음.  </li>
+<li>상태비저장 컴포넌트의 목적은 뷰를 랜더링 하는것 뿐임.  </li>
+<li>속성을 전달받아 처리.  </li>
+<li>예측하기 편해서 이해, 유지보수, 디버깅이 편함.<br>=&gt; 상태비저장컴포넌트 많이 사용하고 상태저장컴포넌트는 적게 사용하는게 바람직함.  </li>
+</ul>
+<p>아래는 상태비저장 컴포넌트 예제<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorld</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1&#123;...this.props&#125;</span>&gt;</span> Hello&#123; this.props.frameworkName&#125; world!!!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>상태가 필요하지 않으면 함수로 선언하면됨.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">functipn Link(props)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> =<span class="hljs-string">&#123;props.href&#125;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"btn btn-primary"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">    &#123;props.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;Link text =<span class="hljs-string">'Buy React Quickly'</span></span><br><span class="line">    href =<span class="hljs-string">'https://www.manning.com/books/react-quickly'</span> /&gt;,</span><br><span class="line">    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> Link = <span class="hljs-function">(<span class="hljs-params">props</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        &lt;href=&#123;props.href&#125;</span><br><span class="line">        target =<span class="hljs-string">"_blank"</span></span><br><span class="line">        className=<span class="hljs-string">"btn btn-primary"</span> &gt;</span><br><span class="line">            &#123;props.text&#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/a&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>상태비저장 컴포넌트는 상태를 가질 수 없지만 propTypes와 defaultProps를 프로퍼티로 가질 수 있다.<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Link</span> (<span class="hljs-params">props</span>)</span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&#123;props.href&#125;</span></span></span></span><br><span class="line"><span class="hljs-xml">    target="_blank"</span></span><br><span class="line"><span class="hljs-xml">    className="btn btn-primary"&gt;</span></span><br><span class="line"><span class="hljs-xml">        &#123;props.text&#125;</span></span><br><span class="line"><span class="hljs-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Link.propTypes=&#123;...&#125;</span><br><span class="line">Link.defaultProps=&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-5-상태비저장-컴포넌트와-상태저장-컴포넌트의-비교"><a href="#4-5-상태비저장-컴포넌트와-상태저장-컴포넌트의-비교" class="headerlink" title="4.5 상태비저장 컴포넌트와 상태저장 컴포넌트의 비교"></a>4.5 상태비저장 컴포넌트와 상태저장 컴포넌트의 비교</h2><p>HTML 렌더링을 처리하는것으로 충분한 경우 상태비저장 컴포포넌트가 더 선언적이고 작동이 잘됨.</p>
+<ul>
+<li><p>상태를 사용해야 하는 경우</p>
+<ul>
+<li>UI 상태, 상호작용, 서버에서 데이터 불러오는것 등 을 관리하려면 상태저장 컴포넌트를 활용한다.</li>
+</ul>
+</li>
+<li><p>아날로그와 디지털 방식으로 노출하는 시계</p>
+<ul>
+<li>프로젝트 구조<br>/clock-analog-digital<br>  /jsx  <pre><code>analog-display.jsx  
+clock.jsx  
+digital-display.jsx  
+script.jsx  
+</code></pre>  /js  <pre><code>analog-display.js  
+clock.js  
+digital-display.js  
+script.js  
+react.js  
+react-dom.js  
+</code></pre>/<br>  index.html</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">render() &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Rendering...'</span>)</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    &lt;AnalogDisplay time=&#123;this.state.currentTime&#125;/&gt;</span><br><span class="line">    &lt;DigitalDisplay time=&#123;this.state.currentTime&#125;/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> DigitalDisplay = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">props</span>)</span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;props.time&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> AnalogDisplay = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">props</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(props.time);</span><br><span class="line">  <span class="hljs-keyword">let</span> dialStyle = &#123;</span><br><span class="line">    position: <span class="hljs-string">'relative'</span>,</span><br><span class="line">    top: <span class="hljs-number">0</span>,</span><br><span class="line">    left: <span class="hljs-number">0</span>,</span><br><span class="line">    width: <span class="hljs-number">200</span>,</span><br><span class="line">    height: <span class="hljs-number">200</span>,</span><br><span class="line">    borderRadius: <span class="hljs-number">20000</span>,</span><br><span class="line">    borderStyle: <span class="hljs-string">'solid'</span>,</span><br><span class="line">    borderColor: <span class="hljs-string">'black'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="hljs-keyword">let</span> secondHandStyle = &#123;</span><br><span class="line">    position: <span class="hljs-string">'relative'</span>,</span><br><span class="line">    top: <span class="hljs-number">100</span>,</span><br><span class="line">    left: <span class="hljs-number">100</span>,</span><br><span class="line">    border: <span class="hljs-string">'1px solid red'</span>,</span><br><span class="line">    width: <span class="hljs-string">'40%'</span>,</span><br><span class="line">    height: <span class="hljs-number">1</span>,</span><br><span class="line">    transform: <span class="hljs-string">'rotate('</span> + (date.getSeconds() / <span class="hljs-number">60</span> * <span class="hljs-number">360</span> - <span class="hljs-number">90</span>).toString() + <span class="hljs-string">'deg)'</span>,</span><br><span class="line">    transformOrigin: <span class="hljs-string">'0% 0%'</span>,</span><br><span class="line">    backgroundColor: <span class="hljs-string">'red'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="hljs-keyword">let</span> minuteHandStyle = &#123;</span><br><span class="line">    position: <span class="hljs-string">'relative'</span>,</span><br><span class="line">    top: <span class="hljs-number">100</span>,</span><br><span class="line">    left: <span class="hljs-number">100</span>,</span><br><span class="line">    border: <span class="hljs-string">'1px solid grey'</span>,</span><br><span class="line">    width: <span class="hljs-string">'40%'</span>,</span><br><span class="line">    height: <span class="hljs-number">3</span>,</span><br><span class="line">    transform: <span class="hljs-string">'rotate('</span> + (date.getMinutes() / <span class="hljs-number">60</span> * <span class="hljs-number">360</span> - <span class="hljs-number">90</span>).toString() + <span class="hljs-string">'deg)'</span>,</span><br><span class="line">    transformOrigin: <span class="hljs-string">'0% 0%'</span>,</span><br><span class="line">    backgroundColor: <span class="hljs-string">'grey'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="hljs-keyword">let</span> hourHandStyle = &#123;</span><br><span class="line">    position: <span class="hljs-string">'relative'</span>,</span><br><span class="line">    top: <span class="hljs-number">92</span>,</span><br><span class="line">    left: <span class="hljs-number">106</span>,</span><br><span class="line">    border: <span class="hljs-string">'1px solid grey'</span>,</span><br><span class="line">    width: <span class="hljs-string">'20%'</span>,</span><br><span class="line">    height: <span class="hljs-number">7</span>,</span><br><span class="line">    transform: <span class="hljs-string">'rotate('</span> + (date.getHours() / <span class="hljs-number">12</span> * <span class="hljs-number">360</span> - <span class="hljs-number">90</span>).toString() + <span class="hljs-string">'deg)'</span>,</span><br><span class="line">    transformOrigin: <span class="hljs-string">'0% 0%'</span>,</span><br><span class="line">    backgroundColor: <span class="hljs-string">'grey'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="hljs-keyword">return</span> React.createElement(</span><br><span class="line">    <span class="hljs-string">'div'</span>,</span><br><span class="line">    <span class="hljs-literal">null</span>,</span><br><span class="line">    React.createElement(</span><br><span class="line">      <span class="hljs-string">'div'</span>,</span><br><span class="line">      &#123; <span class="hljs-attr">style</span>: dialStyle &#125;,</span><br><span class="line">      React.createElement(<span class="hljs-string">'div'</span>, &#123; <span class="hljs-attr">style</span>: secondHandStyle &#125;),</span><br><span class="line">      React.createElement(<span class="hljs-string">'div'</span>, &#123; <span class="hljs-attr">style</span>: minuteHandStyle &#125;),</span><br><span class="line">      React.createElement(<span class="hljs-string">'div'</span>, &#123; <span class="hljs-attr">style</span>: hourHandStyle &#125;)</span><br><span class="line">    )</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/react/">react</a>, <a class="has-link-grey -link" href="/tags/tec/">tec</a>, <a class="has-link-grey -link" href="/tags/리엑트/">리엑트</a>, <a class="has-link-grey -link" href="/tags/프레임워크/">프레임워크</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/29/tec/react/react6/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">[React 교과서] 5장 React 컴포넌트 라이프사이클 이벤트</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/14/tec/react/react4/">
+                <span class="level-item">[React 교과서] 3장 JSX</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://eunii.github.io/2019/08/28/tec/react/react5/';
+        this.page.identifier = '2019/08/28/tec/react/react5/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'crlo2' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/ap.jpg" alt="eunii">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        eunii
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        developer/traveler
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Galaxy</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        포스트
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        83
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        카테고리
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        태그
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eunii" target="_blank" rel="external nofollow noopener noreferrer">
+                팔로우</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-React컴포넌트의-상태란">
+        <span class="has-mr-6">1</span>
+        <span>4.1 React컴포넌트의 상태란?</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-상태-객체-다루기">
+        <span class="has-mr-6">2</span>
+        <span>4.2 상태 객체 다루기</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-2-1-상태-객체에-접근하기">
+        <span class="has-mr-6">2.1</span>
+        <span>4.2.1 상태 객체에 접근하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-2-초기-상태-설정하기">
+        <span class="has-mr-6">2.2</span>
+        <span>4.2.2 초기 상태 설정하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-3-상태-갱신하기">
+        <span class="has-mr-6">2.3</span>
+        <span>4.2.3 상태 갱신하기</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-3-상태-객체와-속성">
+        <span class="has-mr-6">3</span>
+        <span>4.3 상태 객체와 속성</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-4-상태비저장-컴포넌트">
+        <span class="has-mr-6">4</span>
+        <span>4.4 상태비저장 컴포넌트</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-5-상태비저장-컴포넌트와-상태저장-컴포넌트의-비교">
+        <span class="has-mr-6">5</span>
+        <span>4.5 상태비저장 컴포넌트와 상태저장 컴포넌트의 비교</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카탈로그
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-React컴포넌트의-상태란">
+        <span class="has-mr-6">1</span>
+        <span>4.1 React컴포넌트의 상태란?</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-상태-객체-다루기">
+        <span class="has-mr-6">2</span>
+        <span>4.2 상태 객체 다루기</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-2-1-상태-객체에-접근하기">
+        <span class="has-mr-6">2.1</span>
+        <span>4.2.1 상태 객체에 접근하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-2-초기-상태-설정하기">
+        <span class="has-mr-6">2.2</span>
+        <span>4.2.2 초기 상태 설정하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-3-상태-갱신하기">
+        <span class="has-mr-6">2.3</span>
+        <span>4.2.3 상태 갱신하기</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-3-상태-객체와-속성">
+        <span class="has-mr-6">3</span>
+        <span>4.3 상태 객체와 속성</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-4-상태비저장-컴포넌트">
+        <span class="has-mr-6">4</span>
+        <span>4.4 상태비저장 컴포넌트</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-5-상태비저장-컴포넌트와-상태저장-컴포넌트의-비교">
+        <span class="has-mr-6">5</span>
+        <span>4.5 상태비저장 컴포넌트와 상태저장 컴포넌트의 비교</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/tec/">
+            <span class="level-start">
+                <span class="level-item">tec</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">52</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/tec/alogrithm/">
+            <span class="level-start">
+                <span class="level-item">alogrithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/network/">
+            <span class="level-start">
+                <span class="level-item">network</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/react/">
+            <span class="level-start">
+                <span class="level-item">react</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/spring/">
+            <span class="level-start">
+                <span class="level-item">spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tec/sql/">
+            <span class="level-start">
+                <span class="level-item">sql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/trip/">
+            <span class="level-start">
+                <span class="level-item">trip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/trip/america/">
+            <span class="level-start">
+                <span class="level-item">america</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/trip/island/">
+            <span class="level-start">
+                <span class="level-item">island</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">30</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">10월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">9월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">8월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">6월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">25</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">3월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">2월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/alogrithm/" style="font-size: 16px;">alogrithm</a> <a href="/tags/blog/" style="font-size: 17px;">blog</a> <a href="/tags/disque/" style="font-size: 10px;">disque</a> <a href="/tags/framework/" style="font-size: 11px;">framework</a> <a href="/tags/github/" style="font-size: 17px;">github</a> <a href="/tags/google-analytics/" style="font-size: 11px;">google-analytics</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java의-정석/" style="font-size: 18px;">java의 정석</a> <a href="/tags/jekyll/" style="font-size: 13px;">jekyll</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/noip/" style="font-size: 10px;">noip</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/spirng-boot/" style="font-size: 10px;">spirng boot</a> <a href="/tags/spring/" style="font-size: 11px;">spring</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/tec/" style="font-size: 19px;">tec</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/골든서클/" style="font-size: 10px;">골든서클</a> <a href="/tags/공유기/" style="font-size: 10px;">공유기</a> <a href="/tags/눈/" style="font-size: 10px;">눈</a> <a href="/tags/도메인/" style="font-size: 10px;">도메인</a> <a href="/tags/리엑트/" style="font-size: 15px;">리엑트</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/무지개/" style="font-size: 10px;">무지개</a> <a href="/tags/미국/" style="font-size: 10px;">미국</a> <a href="/tags/빙하/" style="font-size: 11px;">빙하</a> <a href="/tags/소켓통신/" style="font-size: 10px;">소켓통신</a> <a href="/tags/숙소/" style="font-size: 12px;">숙소</a> <a href="/tags/시간복잡도/" style="font-size: 11px;">시간복잡도</a> <a href="/tags/아이슬란드/" style="font-size: 19px;">아이슬란드</a> <a href="/tags/알고리즘/" style="font-size: 14px;">알고리즘</a> <a href="/tags/여행/" style="font-size: 20px;">여행</a> <a href="/tags/옐로우스톤/" style="font-size: 10px;">옐로우스톤</a> <a href="/tags/오로라/" style="font-size: 12px;">오로라</a> <a href="/tags/유럽/" style="font-size: 19px;">유럽</a> <a href="/tags/자료구조/" style="font-size: 10px;">자료구조</a> <a href="/tags/재귀함수/" style="font-size: 10px;">재귀함수</a> <a href="/tags/정렬/" style="font-size: 12px;">정렬</a> <a href="/tags/폭포/" style="font-size: 11px;">폭포</a> <a href="/tags/프레임워크/" style="font-size: 15px;">프레임워크</a> <a href="/tags/해변/" style="font-size: 10px;">해변</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="[React 교과서] 4장 React 컴포넌트의 객체 상태" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 eunii&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/eunii" rel="external nofollow noopener noreferrer">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
